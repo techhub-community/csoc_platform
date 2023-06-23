@@ -60,7 +60,11 @@
           <li><a class="nav-link scrollto" href="#portfolio">Team</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           <li><a class="nav-link scrollto" href="#portfolio"></a></li>
-          <li><a class="getstarted scrollto">Login</a></li>
+          {% if request.user.is_authenticated %}
+            <li><a class="getstarted scrollto" href="">Dashboard</a></li>
+          {% else %}
+          <li><a class="getstarted scrollto" href="{% url 'user:login' %}">Login</a></li>
+          {% endif %}
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -77,7 +81,9 @@
           <h1><b>CodeShack Summer of Code 2023</b></h1>
           <h2>Unlock your coding potential at CodeShack Summer of Code: Igniting Brilliance, Fueling Innovation</h2>
           <div>
-            <a href="{% url 'user:register' %}" class="btn-get-started scrollto"><b>Register Here</b></a>
+            {% if not request.user.is_authenticated %}
+              <a href="{% url 'user:register' %}" class="btn-get-started scrollto"><b>Register Here</b></a>
+            {% endif %}
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
