@@ -131,6 +131,7 @@
   /**
    * Scroll with ofset on page load with hash links in the url
    */
+
   window.addEventListener('load', () => {
     if (window.location.hash) {
       if (select(window.location.hash)) {
@@ -151,6 +152,17 @@
       });
 
       let portfolioFilters = select('#portfolio-flters li', true);
+      let initialFilter = select('[data-filter=".filter-1"]');
+    
+      if (initialFilter) {
+        initialFilter.classList.add('filter-active');
+        portfolioIsotope.arrange({
+          filter: initialFilter.getAttribute('data-filter')
+        });
+        portfolioIsotope.on('arrangeComplete', function() {
+          AOS.refresh()
+        });
+      }
 
       on('click', '#portfolio-flters li', function(e) {
         e.preventDefault();
