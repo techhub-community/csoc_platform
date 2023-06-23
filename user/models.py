@@ -14,6 +14,7 @@ class User(AbstractUser):
     username = None
     email = models.EmailField(_('email address'), unique=True)
     password = models.CharField(max_length=128)
+    is_active = models.BooleanField(default=False)
     program_selected = models.ForeignKey(Program, null=True, on_delete=models.SET_NULL)
     techstack = models.TextField(_("Techstack"), null=True, default=None, blank=True)
     phone_number = PhoneNumberField()

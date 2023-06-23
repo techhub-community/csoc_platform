@@ -16,11 +16,10 @@ from .models import User, Program
 
 
 class IsUserAuthenticatedMixin:
-    def get(self, request, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
             return redirect("index")
-        form = self.form_class()
-        return render(request, self.template_name, {"form": form})
+        return super().dispatch(request, *args, **kwargs)
 
 
 class UserLoginView(IsUserAuthenticatedMixin, TemplateView):
@@ -29,6 +28,7 @@ class UserLoginView(IsUserAuthenticatedMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
+        print(form.errors)
         if form.is_valid():
             email = form.cleaned_data["email"]
             password = form.cleaned_data["password"]
@@ -36,7 +36,7 @@ class UserLoginView(IsUserAuthenticatedMixin, TemplateView):
             status = User.objects.filter(email=email)
             if user is not None:
                 login(request, user)
-                return redirect("home:index")
+                return redirect("index")
             elif status.values() and not status.values()[0]["is_active"]:
                 form.add_error(None, "Your account is not been verified")
             else:
@@ -50,20 +50,19 @@ class UserRegisterView(IsUserAuthenticatedMixin, TemplateView):
     success_url = reverse_lazy("users:login")
 
     def get_context_data(self, **kwargs):
-        context = {}
+        context = super().get_context_data(**kwargs)
         programs = Program.objects.all()
-        context['form'] = self.form_class
         context['programs'] = programs
         return context
 
-    def get(self, request, *args, **kwargs):
-        context = self.get_context_data()
-        return render(request, self.template_name, context)
-
     def post(self, request):
-        form = CustomUserCreationForm(request.POST)
+        form = self.form_class(request.POST)
         print(form.errors)
         if form.is_valid():
             form.save()
             return redirect('index')
         return render(request, self.template_name, self.get_context_data())
+
+
+class UserLogoutView(LogoutView):
+    next_page = "index"
