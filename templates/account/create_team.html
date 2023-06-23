@@ -1,0 +1,138 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'assets/fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+ <!--% static 'assets/css/timeline.css' %-->
+  <link rel="stylesheet" href="{% static 'assets/css/timeline.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    
+    <!-- Style -->
+
+    <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}">
+
+    <title>Sign Up #2</title>
+  </head>
+  <style>
+    .form-check-input[type="radio"]:checked {
+      background-color: #FA761B;
+    }
+  </style>
+  <body  style="background: rgb(255,226,206);background: linear-gradient(90deg, rgba(255,226,206,1) 0%, rgba(250,118,27,1) 50%, rgba(255,252,241,1) 100%);">
+    <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+       <!-- <h1 class="text-light"><a href="index.html"><img src=""></a></h1>  -->
+        <!-- Uncomment below if you prefer to use an image logo -->
+         <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo3.png' %}" alt="" class="img-fluid" height="1000px" width="180px"></a>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="getstarted scrollto" href="{% url 'user:register' %}">Register</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+  <div class="d-lg-flex" style="background: rgb(255,226,206);background: linear-gradient(90deg, rgba(255,226,206,1) 0%, rgba(250,118,27,1) 50%, rgba(255,252,241,1) 100%);">
+      <div class="container mt-5">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-9 py-5">
+            <div class="p-4 border border-5" style="background-color: #FFFFFF">
+            <p class="mb-4"></p>
+            <form method="post" style="background-color: #FFFFFF">
+              {% csrf_token %}
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group first">
+                          <label for="text">Member 1</label>
+                          <input type="text" value="{{ user }}" class="form-control" id="member1" name="member1" disabled>
+                      </div>    
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group last mb-3">
+                          <label for="password">Member 2</label>
+                          <select class="form-control" id="website" name="program_selected">
+                            <option value="">None</option>
+                            {% for free_user in available_users %}
+                                <option value="{{ free_user }}">{{ free_user }}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group last mb-3">
+                          <label for="password">Member 3</label>
+                          <select class="form-control" id="website" name="program_selected">
+                            <option value="">None</option>
+                            {% for free_user in available_users %}
+                                <option value="{{ free_user }}">{{ free_user }}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                  </div>
+              </div>
+              <div class="d-flex mb-2 mt-4 align-items-center">
+              </div>
+              <input type="submit" value="Login" class="btn px-5 btn-primary">
+              </div>
+          </form>
+          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/main1.js' %}"></script>
+    <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{%static 'assets/js/main.js' %}"></script>
+  </div>
+  </body>
+</html>
+

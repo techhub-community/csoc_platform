@@ -1,7 +1,12 @@
 import threading
+from typing import Any, Dict
+from django import http
 
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LogoutView
+from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.views.generic import View, TemplateView
@@ -12,7 +17,7 @@ from django.contrib.auth.views import PasswordResetView, PasswordChangeView
 from django.views.generic import FormView
 
 from .forms import CustomUserCreationForm, LoginForm
-from .models import User, Program
+from .models import Member, User, Program
 
 
 class IsUserAuthenticatedMixin:
@@ -55,14 +60,29 @@ class UserRegisterView(IsUserAuthenticatedMixin, TemplateView):
         context['programs'] = programs
         return context
 
-    def post(self, request):
+    def post(self, request, **kwargs):
         form = self.form_class(request.POST)
         print(form.errors)
         if form.is_valid():
             form.save()
             return redirect('index')
-        return render(request, self.template_name, self.get_context_data())
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
 
 
 class UserLogoutView(LogoutView):
     next_page = "index"
+
+
+class UserCreateTeamView(LoginRequiredMixin, TemplateView):
+    template_name = "account/create_team.html"
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        current_user = self.request.user
+        users =  User.objects.filter(is_active=True, is_superuser=False).exclude(id=current_user.id).distinct()
+        unavailable_users = Member.objects.filter(acceptance_status=True).distinct().values_list('user_id', flat=True)
+        available_users = users.exclude(id__in=unavailable_users)
+        context['available_users'] = available_users
+        return context
+    
