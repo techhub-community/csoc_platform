@@ -40,12 +40,13 @@
 
     <title>Sign Up #2</title>
   </head>
+
   <style>
     .form-check-input[type="radio"]:checked {
       background-color: #FA761B;
     }
   </style>
-  <body  style="background: rgb(255,226,206);background: linear-gradient(90deg, rgba(255,226,206,1) 0%, rgba(250,118,27,1) 50%, rgba(255,252,241,1) 100%);">
+  <body  style="background: #FEF8F4">
     <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
@@ -65,8 +66,39 @@
 
     </div>
   </header><!-- End Header -->
-  <div class="d-lg-flex" style="background: rgb(255,226,206);background: linear-gradient(90deg, rgba(255,226,206,1) 0%, rgba(250,118,27,1) 50%, rgba(255,252,241,1) 100%);">
-      <div class="container mt-5">
+  <!-- Hero -->
+  <div class="mask" >
+    <div class="p-5 text-center bg-image " style="
+    background-image: url({% static 'assets/img/2.jpg' %});
+    height: 350px;
+    background-size: cover;
+  ">
+  <div class="overlay" style="position: absolute;top: 0;left: 0;
+  width: 100%;
+  height: 350px;
+  background-color: rgba(0, 0, 0, 0.5);"></div>
+<div class="d-flex justify-content-start align-items-center h-100">
+  <div class="text-white">
+    <div class="row">
+      <h1 class="col-lg-6 offset-lg-5 col-md-8 offset-md-5 col-10 offset-5" style="margin-top: 16vh;"><b>Register</b></h1>
+    </div>
+    <div class="row">
+      <!-- <h2 class="col-md-8 offset-md-2 col-10 offset-1" style="margin-left: 15vh;"><a href="{% url 'index' %}" class="text-white">Home</a>/<a href="" class="text-white">Register</a></h2> -->
+      <h2 class="col-md-8 offset-md-2 col-10 offset-1" style="margin-left: 15vh;">
+        <a href="{% url 'index' %}" style="color: white;" onmouseover="this.style.color=''" onmouseout="this.style.color='white'">Home</a>/
+        <a href="" style="color: white;" onmouseover="this.style.color=''" onmouseout="this.style.color='white'">Register</a>
+      </h2>
+      
+    </div>
+  </div>  
+</div>
+</div>
+</div>
+<!-- Hero -->
+
+<!-- body -->
+  <div class="d-lg-flex" style="background: #FEF8F4">
+      <div class="container mt-0">
         <div class="row align-items-center justify-content-center">
           <div class="col-md-9 py-5">
             <div class="p-4 border border-5" style="background-color: #FFFFFF">
