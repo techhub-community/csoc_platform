@@ -45,7 +45,7 @@
       background-color: #FA761B;
     }
   </style>
-  <body  style="background: #FEF8F4">
+  <body  style="background: rgb(255,226,206);background: linear-gradient(90deg, rgba(255,226,206,1) 0%, rgba(250,118,27,1) 50%, rgba(255,252,241,1) 100%);">
     <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
@@ -65,31 +65,7 @@
 
     </div>
   </header><!-- End Header -->
-  <!-- HERO -->
-  
-  <div class="p-5 text-center bg-image " style="
-    background-image: url({% static 'assets/img/2.jpg' %});
-    height: 350px;
-    background-size: cover;
-  ">
-  <div class="overlay" style="position: absolute;top: 0;left: 0;
-  width: 100%;
-  height: 350px;
-  background-color: rgba(0, 0, 0, 0.5);"></div>
-    <div class="mask" >
-    <div class="d-flex justify-content-start align-items-center h-100">
-      <div class="text-white">
-        <div class="row">
-          <h1 class="col-lg-6 offset-lg-6 col-md-8 offset-md-5 col-10 offset-5" style="margin-top: 16vh;"><b>LogIn</b></h1>
-        </div>
-        <div class="row">
-          <h2 class="col-md-8 offset-md-2 col-10 offset-1" style="margin-left: 15vh;"><a href="{% url 'index' %}" style="color: white;" onmouseover="this.style.color=''" onmouseout="this.style.color='white'">Home</a>/<a href="" style="color: white;" onmouseover="this.style.color=''" onmouseout="this.style.color='white'">LogIn</a></h2>
-        </div>
-      </div>  
-    </div>
-    </div>
-    </div>
-  <div class="d-lg-flex" style="background: #FEF8F4";">
+  <div class="d-lg-flex" style="background: rgb(255,226,206);background: linear-gradient(90deg, rgba(255,226,206,1) 0%, rgba(250,118,27,1) 50%, rgba(255,252,241,1) 100%);">
       <div class="container mt-5">
         <div class="row align-items-center justify-content-center">
           <div class="col-md-9 py-5">
@@ -100,22 +76,41 @@
               <div class="row">
                   <div class="col-md-12">
                       <div class="form-group first">
-                          <label for="email">Email Address</label>
-                          <input type="email" class="form-control" placeholder="e.g. john@your-domain.com" id="email" name="email">
+                          <label for="text">Member 1</label>
+                          <input type="text" value="{{ user }}" class="form-control" id="member1" name="member1" disabled>
                       </div>    
                   </div>
               </div>
               <div class="row">
                   <div class="col-md-12">
                       <div class="form-group last mb-3">
-                          <label for="password">Password</label>
-                          <input type="password" name="password" class="form-control" placeholder="Your Password" id="password">
+                          <label for="password">Member 2</label>
+                          <select class="form-control" id="website" name="program_selected">
+                            <option value="">None</option>
+                            {% for free_user in available_users %}
+                                <option value="{{ free_user }}">{{ free_user }}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group last mb-3">
+                          <label for="password">Member 3</label>
+                          <select class="form-control" id="website" name="program_selected">
+                            <option value="">None</option>
+                            {% for free_user in available_users %}
+                                <option value="{{ free_user }}">{{ free_user }}</option>
+                            {% endfor %}
+                        </select>
                       </div>
                   </div>
               </div>
               <div class="d-flex mb-2 mt-4 align-items-center">
               </div>
               <input type="submit" value="Login" class="btn px-5 btn-primary">
+              </div>
           </form>
           
           </div>
