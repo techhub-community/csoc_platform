@@ -1,9 +1,10 @@
 from django.urls import path
 
-from django.views.generic import TemplateView
+from .views import UserRegisterView, UserLoginView
 
 app_name = 'user'
 
 urlpatterns = [
-    path('register/', TemplateView.as_view(template_name='registration.html'), name='register')
+    path('register/', UserRegisterView.as_view(), name='register'),
+    path('login/', UserLoginView.as_view(), name='login')
 ]

@@ -57,13 +57,10 @@
           <li><a class="nav-link scrollto" href="#about">About Us</a></li>
          
           <li><a class="nav-link scrollto" href="#services">Timeline</a></li>
-        <!--
-          <li><a class="nav-link scrollto" href="#portfolio"></a></li>
-          -->
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li><a class="nav-link scrollto" href="#portfolio">Team</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="nav-link scrollto" style="color:#eb5d1e;font-weight:bold" href="">Login</a></li>
-          <li><a class="getstarted scrollto" href="{% url 'user:register' %}">Signup</a></li>
+          <li><a class="nav-link scrollto" href="#portfolio"></a></li>
+          <li><a class="getstarted scrollto">Login</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -80,7 +77,7 @@
           <h1><b>CodeShack Summer of Code 2023</b></h1>
           <h2>Unlock your coding potential at CodeShack Summer of Code: Igniting Brilliance, Fueling Innovation</h2>
           <div>
-            <a href="./registration.html" class="btn-get-started scrollto"><b>Register Here</b></a>
+            <a href="{% url 'user:register' %}" class="btn-get-started scrollto"><b>Register Here</b></a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
@@ -1331,14 +1328,14 @@
     <!-- ======= Contact Us Section ======= -->
     <section id="contact" class="contact">
       <div class="container" data-aos="fade-up">
-
+<!--
         <div class="section-title">
           <h2>Contact Us</h2>
           <p>Feel Free To Reach Out Us !</p>
           <br>
           
         </div>
-
+      -->
         <section id="contact" class="contact">
           <div class="container" data-aos="fade-up">
     
