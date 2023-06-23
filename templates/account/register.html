@@ -1,0 +1,193 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'assets/fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+ <!--% static 'assets/css/timeline.css' %-->
+  <link rel="stylesheet" href="{% static 'assets/css/timeline.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    
+    <!-- Style -->
+
+    <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}">
+
+    <title>Sign Up #2</title>
+  </head>
+  <style>
+    .form-check-input[type="radio"]:checked {
+      background-color: #FA761B;
+    }
+  </style>
+  <body  style="background: rgb(255,226,206);background: linear-gradient(90deg, rgba(255,226,206,1) 0%, rgba(250,118,27,1) 50%, rgba(255,252,241,1) 100%);">
+    <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+       <!-- <h1 class="text-light"><a href="index.html"><img src=""></a></h1>  -->
+        <!-- Uncomment below if you prefer to use an image logo -->
+         <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo3.png' %}" alt="" class="img-fluid" height="1000px" width="180px"></a>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="getstarted scrollto" href="{% url 'user:login' %}">Login</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+  <div class="d-lg-flex" style="background: rgb(255,226,206);background: linear-gradient(90deg, rgba(255,226,206,1) 0%, rgba(250,118,27,1) 50%, rgba(255,252,241,1) 100%);">
+      <div class="container mt-5">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-md-9 py-5">
+            <div class="p-4 border border-5" style="background-color: #FFFFFF">
+            <p class="mb-4"></p>
+            <form method="post" style="background-color: #FFFFFF">
+              {% csrf_token %}
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group first">
+                          <label for="fname">First Name</label>
+                          <input type="text" class="form-control" placeholder="e.g. John" id="fname" name="first_name">
+                      </div>    
+                  </div>
+                  <div class="col-md-6">
+                      <div class="form-group first">
+                          <label for="lname">Last Name</label>
+                          <input type="text" class="form-control" placeholder="e.g. Smith" id="lname" name="last_name">
+                      </div>    
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group first">
+                          <label for="email">Email Address</label>
+                          <input type="email" class="form-control" placeholder="e.g. john@your-domain.com" id="email" name="email">
+                      </div>    
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group first">
+                          <label for="lname">Phone Number</label>
+                          <input type="text" class="form-control" placeholder="+91 0000 000 0000" id="lname" name="phone_number">
+                      </div>    
+                  </div>
+                  <div class="col-md-6">
+                      <div class="form-group first">
+                          <label for="website">USN</label>
+                          <input type="text" class="form-control" placeholder="1MV20CS000" id="fname" name="usn">
+                      </div>    
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group first">
+                        <label for="website">Program</label>
+                        <select class="form-control" id="website" name="program_selected">
+                            <option value="">None</option>
+                            {{ programs }}
+                            {% for program in programs %}
+                                <option value="{{ program.id }}">{{ program.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="form-group first">
+                          <label for="email">Your Techstack</label>
+                          <textarea class="form-control" placeholder="What all do you know" id="techstack" style="height: 6rem;" name="techstack"></textarea>
+                      </div>    
+                  </div>
+              </div>
+              <label for="website">Proficiency :</label>
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="proficiency" id="inlineRadio1" value="BEG">
+                  <label class="form-check-label" for="inlineRadio1">Beginner</label>
+              </div>
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="proficiency" id="inlineRadio2" value="AVG">
+                  <label class="form-check-label" for="inlineRadio2">Average</label>
+              </div>
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="proficiency" id="inlineRadio3" value="GOO">
+                  <label class="form-check-label" for="inlineRadio3">Good</label>
+              </div>
+              <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="proficiency" id="inlineRadio4" value="EXP">
+                  <label class="form-check-label" for="inlineRadio4">Expert</label>
+              </div>
+              <div class="d-flex mb-1 mt-1 align-items-center">
+              </div>
+              <div class="row">
+                  <div class="col-md-6">
+                      <div class="form-group last mb-3">
+                          <label for="password">Password</label>
+                          <input type="password" name="password1" class="form-control" placeholder="Your Password" id="password">
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="form-group last mb-3">
+                          <label for="re-password">Re-type Password</label>
+                          <input type="password" name="password2" class="form-control" placeholder="Your Password" id="re-password">
+                      </div>
+                  </div>
+              </div>
+              <div class="d-flex mb-2 mt-4 align-items-center">
+              </div>
+              <input type="submit" value="Register" class="btn px-5 btn-primary">
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/main1.js' %}"></script>
+    <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{%static 'assets/js/main.js' %}"></script>
+  </div>
+  </body>
+</html>
+
