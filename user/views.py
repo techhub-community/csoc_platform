@@ -166,3 +166,16 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
             return redirect('index')            
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
+    
+class AcceptInviteView(LoginRequiredMixin, AllowTeamCreationMixin, View):
+    def post(self, request, **kwargs):
+        member = Member.objects.get(id=self.kwargs.get('pk'))
+        member.acceptance_status = True
+        member.save()
+        return redirect('index')
+    
+class RejectInviteView(LoginRequiredMixin, AllowTeamCreationMixin, View):
+    def post(self, request, **kwargs):
+        member = Member.objects.get(id=self.kwargs.get('pk'))
+        member.delete()
+        return redirect('index')
