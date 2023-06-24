@@ -33,6 +33,8 @@ services:
       - "8000:8000"
     depends_on:
       - postgres
+    networks:
+      - csoc_network
 
   nginx:
     build: ./compose/production/nginx
@@ -42,3 +44,11 @@ services:
       - "80:80"
     depends_on:
       - django_gunicorn
+    networks:
+      - csoc_network
+
+
+networks:
+  csoc_network:
+    external: true
+    name: csoc_network
