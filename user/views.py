@@ -192,7 +192,7 @@ class EmailVerificationView(View):
             return render(request,'email_verify.html',{'page':f"http://{settings.DOMAIN}/user/login/"})
         else:
             # Handle invalid token, redirect to an error page or show an error message
-            return render(request,'invite_email_template.html',{'invite_url':f"http://{settings.DOMAIN}/user/login/"})
+            return render(request,'email_verify_fail.html',{'page':f"http://{settings.DOMAIN}/user/login/"})
     
     def get_user(self, token):
         User = get_user_model()
