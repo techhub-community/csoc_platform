@@ -64,7 +64,7 @@
       </div>
 
       <nav id="navbar" class="navbar2">
-        <a class="getstarted scrollto" href="{% url 'user:logout' %}">LogOut</a>
+        <a class="getstarted scrollto" href="{% url 'user:logout' %}">Logout</a>
         <!-- <i class="bi bi-list mobile-nav-toggle"></i> -->
       </nav><!-- .navbar -->
 
@@ -82,7 +82,7 @@
 								<div class="mt-3">
 									<h4>John Doe</h4>
 									<p class="text-secondary mb-1">{{ user.program_selected.name }}</p>
-									<p class="text-muted font-size-sm">{{ team }}</p>
+									<p class="text-muted font-size-sm">{{ team.name }}</p>
 									
 								</div>
 							</div>
@@ -110,14 +110,14 @@
 
               <div class="row mb-3">
                 <div class="col-md-6">
-                  <label for="FirstName" class="form-label"><h6 class="display-6">{{ user.first_name }}</h6></label>
-                  <input type="text" name="firstName" class="form-control" value="First Name" id="firstName" required>
+                  <label for="FirstName" class="form-label"><h6 >First Name</h6></label>
+                  <input type="text" name="firstName" class="form-control" value="{{ user.first_name }}" id="firstName" required>
                   <span class="formerror" id="error"></span>
                 </div>
               
                 <div class="col-md-6">
-                  <label for="LastName" class="form-label"><h6 class="display-6">Last Name</h6></label>
-                  <input type="text" class="form-control"  value="Last Name" id="lastName" required>
+                  <label for="LastName" class="form-label"><h6 >Last Name</h6></label>
+                  <input type="text" class="form-control"  value="{{ user.last_name }}" id="lastName" required>
                 </div>
               </div>
               
@@ -129,7 +129,7 @@
                 <h6 class="mb-0">Email</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input type="text" class="form-control" value=""  style="background-color: white; color: black;" readonly>
+                <input type="text" class="form-control" value="{{ user.email }}"  style="background-color: white; color: black;" readonly>
               </div>
             </div>
 
@@ -139,7 +139,7 @@
                 <h6 class="mb-0">USN</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input type="text" class="form-control" value=""  style="background-color: white; color: black;" readonly>
+                <input type="text" class="form-control" value="{{ user.usn }}"  style="background-color: white; color: black;" readonly>
               </div>
             </div>
 
@@ -153,7 +153,7 @@
 									<h6 class="mb-0">Phone Number</h6>
 								</div>
 								<div class="col-sm-9 text-secondary">
-									<input type="text" class="form-control" value="(320) 380-4539">
+									<input type="text" class="form-control" value="{{ user.phone_number }}">
 								</div>
 							</div>
 
@@ -165,7 +165,7 @@
                 <h6 class="mb-0">Program</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input type="text" class="form-control" value=""  style="background-color: white; color: black;" readonly>
+                <input type="text" class="form-control" value="{{ user.program_selected.name }}"  style="background-color: white; color: black;" readonly>
               </div>
             </div>
  
@@ -175,7 +175,7 @@
                 <h6 class="mb-0">Your Techstack</h6>
               </div>
               <div class="col-sm-9 text-secondary">
-                <input type="text" class="form-control" value=""  style="background-color: white; color: black;" readonly>
+                <input type="text" class="form-control" {% if user.techstack %}value="{{ user.techstack }}"{% endif %} style="background-color: white; color: black;" readonly>
               </div>
             </div>
 
@@ -187,34 +187,30 @@
               </div>
               <div class="col-sm-9 text-secondary">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="techstack" id="specifyColor" value="option1" disabled>
+                  <input class="form-check-input" type="radio" name="techstack" id="specifyColor" value="option1"  {% if user.proficiency == 'BEG' %}checked=true{% else %}disabled{% endif %}>
                   <label class="form-check-label" for="option1">Beginner</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="techstack" id="specifyColor" value="option2" disabled>
+                  <input class="form-check-input" type="radio" name="techstack" id="specifyColor" value="option2"  {% if user.proficiency == 'AVG' %}checked=true{% else %}disabled{% endif %}>
                   <label class="form-check-label" for="option2">Average</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="techstack" id="specifyColor" value="option3" disabled>
+                  <input class="form-check-input" type="radio" name="techstack" id="specifyColor" value="option3" {% if user.proficiency == 'GOO' %}checked=true{% else %}disabled{% endif %}>
                   <label class="form-check-label" for="option3">Good</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="techstack" id="specifyColor" value="option4" disabled>
+                  <input class="form-check-input" type="radio" name="techstack" id="specifyColor" value="option4"  {% if user.proficiency == 'EXP' %}checked=true{% else %}disabled{% endif %}>
                   <label class="form-check-label" for="option4">Expert</label>
                 </div>
               </div>
             </div>
-            
-              
-             
-            
            
-            <div class="row">
+            {% comment %} <div class="row">
               <div class="col-sm-7"></div>
               <div class="col-sm-9 text-secondary">
                 <input type="button" class="btn btn-warning px-4 float-start" style="background-color: rgb(239,127,77); border-color:  rgb(239,127,77); color: white; " value="Save Changes">
               </div>
-            </div>
+            </div> {% endcomment %}
             
             
         
