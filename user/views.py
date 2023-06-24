@@ -17,7 +17,7 @@ from django.contrib.auth.views import PasswordResetView, PasswordChangeView
 from django.views.generic import FormView
 
 from .forms import CustomUserCreationForm, LoginForm, CreateTeamForm
-from .models import Member, User, Program, Team
+from .models import Member, User, Program, Team, Invite
 from csoc_backend.views import AllowTeamCreationMixin
 
 
@@ -154,10 +154,14 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
             if member2 and not Member.objects.filter(user=member2, acceptance_status=True):
                 member2 = User.objects.get(id=member2)
                 member2 = Member.objects.create(user=member2, team=team)
+                invite = Invite.objects.create(sender=member1, receiver=member2, team=team)
+                invite.save()
             
             if member3 and not Member.objects.filter(user=member3, acceptance_status=True):
                 member3 = User.objects.get(id=member3)
                 member3 = Member.objects.create(user=member3, team=team)
+                invite = Invite.objects.create(sender=member1, receiver=member3, Team=team)
+                invite.save()
 
             return redirect('index')            
         context = self.get_context_data(**kwargs)

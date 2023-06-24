@@ -12,6 +12,7 @@ def delete_duplicate_members(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Invite)
 def send_invite_email(sender, instance, created, **kwargs):
+    print("send_invite_email singal called")
     
     if created:
         subject = 'Team-Invitation'
