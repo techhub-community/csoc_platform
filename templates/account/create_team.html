@@ -85,12 +85,16 @@
                   <div class="col-md-12">
                       <div class="form-group last mb-3">
                           <label for="password">Member 2</label>
-                          <select class="form-control" id="website" name="program_selected">
-                            <option value="">None</option>
-                            {% for free_user in available_users %}
-                                <option value="{{ free_user }}">{{ free_user }}</option>
-                            {% endfor %}
-                        </select>
+                          {% if member2 %}
+                            <input type="text" value="{{ member2.user }}" class="form-control" id="member1" name="member1" disabled>
+                          {% else %}
+                            <select class="form-control" id="website" name="member2">
+                              <option value="">None</option>
+                              {% for free_user in available_users %}
+                                  <option value="{{ free_user.id }}">{{ free_user }}</option>
+                              {% endfor %}
+                            </select>
+                          {% endif %}
                       </div>
                   </div>
               </div>
@@ -98,18 +102,22 @@
                   <div class="col-md-12">
                       <div class="form-group last mb-3">
                           <label for="password">Member 3</label>
-                          <select class="form-control" id="website" name="program_selected">
-                            <option value="">None</option>
-                            {% for free_user in available_users %}
-                                <option value="{{ free_user }}">{{ free_user }}</option>
-                            {% endfor %}
-                        </select>
+                          {% if member3 %}
+                            <input type="text" value="{{ member3.user }}" class="form-control" id="member1" name="member1" disabled>
+                          {% else %}
+                            <select class="form-control" id="website" name="member3">
+                              <option value="">None</option>
+                              {% for free_user in available_users %}
+                                  <option value="{{ free_user.id }}">{{ free_user }}</option>
+                              {% endfor %}
+                            </select>
+                          {% endif %}
                       </div>
                   </div>
               </div>
               <div class="d-flex mb-2 mt-4 align-items-center">
               </div>
-              <input type="submit" value="Login" class="btn px-5 btn-primary">
+              <input type="submit" value="Create" class="btn px-5 btn-primary">
               </div>
           </form>
           
