@@ -11,7 +11,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.views.generic import View, TemplateView
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth import authenticate, login, get_user_model, View
+from django.contrib.auth import authenticate, login, get_user_model
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.views import PasswordResetView, PasswordChangeView
 from django.views.generic import FormView
@@ -189,17 +189,19 @@ class EmailVerificationView(View):
             user.is_active = True
             user.save()
             # You can add additional logic here, such as redirecting to a success page
-            return render(request,'account/email_confirm_template',{'page':f"{settings.DOMAIN}/login/"})
+            return render(request,'email_verify.html',{'page':f"http://{settings.DOMAIN}/user/login/"})
         else:
             # Handle invalid token, redirect to an error page or show an error message
-            return render(request,'account/email_confirm_template',{'page':f"{settings.DOMAIN}/login/"})
+            return render(request,'invite_email_template.html',{'invite_url':f"http://{settings.DOMAIN}/user/login/"})
     
     def get_user(self, token):
         User = get_user_model()
         try:
             uidb64, token = token.split(':')
-            uid = default_token_generator.check_token(User, uidb64, token)
-            user = User.objects.get(pk=uid)
+            user = User.objects.get(pk=uidb64)
+            if default_token_generator.check_token(user, token):
+                return user
+            
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            user = None
-        return user
+            pass
+        return None

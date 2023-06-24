@@ -30,9 +30,9 @@ def send_mail_func(sender, instance, created, **kwargs):
     if created:
         subject = 'Team-Invitation'
         recipient_list = [instance.receiver.user.email]
-        image_url = f'{settings.DOMAIN}/static/assets/img/banner.png'
-        invite_url = f'{settings.DOMAIN}/profile/request/'
-        html_message = render_to_string('account/invite_email_template.html', {'sender_name': f'{instance.sender.user.first_name} {instance.sender.user.last_name}','user':instance.receiver.user.first_name, 'image_url':image_url, 'invite_url':invite_url})
+        image_url = f'http://{settings.DOMAIN}/static/assets/img/banner.png'
+        invite_url = f'http://{settings.DOMAIN}/profile/request/'
+        html_message = render_to_string('invite_email_template.html', {'sender_name': f'{instance.sender.user.first_name} {instance.sender.user.last_name}','user':instance.receiver.user.first_name, 'image_url':image_url, 'invite_url':invite_url})
 
         send_mail(subject, '', 'codeshackcommunity@gmail.com', recipient_list, html_message=html_message)
         
@@ -40,10 +40,11 @@ def send_verification_email(user, created):
     print("send_confirm_email signal called")
     if created:
         token = default_token_generator.make_token(user)
-        uid = default_token_generator.make_uid(user)
-        verification_url = f'{settings.DOMAIN}/verify-email/{uid}:{token}/'
+        uid = user.pk
+        verification_url = f"http://{settings.DOMAIN}/user/verify-email/{uid}:{token}/"
         subject = 'Email Verification'
         recipient_list = [user.email]
-        html_message = render_to_string('account/email_confirm_template.html', {'verification_url': verification_url})
         print(verification_url)
+        html_message = render_to_string('email_confirm_template', {'verification_url': verification_url})
+        
         send_mail(subject, '', 'codeshackcommunity@gmail.com', recipient_list, html_message=html_message)
