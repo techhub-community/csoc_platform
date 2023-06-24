@@ -17,11 +17,25 @@ from django.contrib.auth.views import PasswordResetView, PasswordChangeView
 from django.views.generic import FormView
 
 from .forms import CustomUserCreationForm, LoginForm, CreateTeamForm
-from .models import Member, User, Program, Team, Invite
+from .models import Member, User, Program, Team, Invite, Inquiry
 from csoc_backend.views import AllowTeamCreationMixin
 from django.conf import settings
+from django.core.mail import send_mail
 
-import random
+def submit_contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        inquiry=Inquiry.create(name=name,email=email,subject=subject,message=message)
+        inquiry.save()
+        # Redirect to a success page or do any other necessary handling
+          # Assuming you have a 'success' named URL pattern
+
+    # Render the form template if not a POST request or form submission fails
+    return redirect('index')
+
 
 class IsUserAuthenticatedMixin:
     def dispatch(self, request, *args, **kwargs):
