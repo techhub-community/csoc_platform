@@ -4,6 +4,7 @@ from .models import Member, Invite
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
+import threading
 
 @receiver(post_save, sender=Member)
 def delete_duplicate_members(sender, instance, **kwargs):
@@ -12,7 +13,11 @@ def delete_duplicate_members(sender, instance, **kwargs):
 
 @receiver(post_save, sender=Invite)
 def send_invite_email(sender, instance, created, **kwargs):
-    print("send_invite_email singal called")
+    email_thread = threading.Thread(target=send_mail_func,kwargs=({'sender': sender, 'instance': instance, 'created': created}))
+    email_thread.start()
+    
+def send_mail_func(sender, instance, created, **kwargs):
+    print("send_invite_email signal called")
     
     if created:
         subject = 'Team-Invitation'
