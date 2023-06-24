@@ -77,6 +77,10 @@ class UserProfileView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        user = self.request.user
+        team = Member.objects.filter(user=user)
+        context['team'] = team
+        context['team_members'] = Member.objects.filter(team=team.first(), acceptance_status=True) if team else None
         return context
     
 
@@ -113,7 +117,7 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
                     index+=1
         print(context)
         return context
-    # singals for updating member model, email generation, UI update when showing 
+    # email generation, UI update when showing 
     # waiting -> yellow, accpeted -> green, rejected -> dropbox
     def post(self, request, **kwargs):
         form = self.form_class(request.POST, request=request)
