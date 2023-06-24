@@ -53,7 +53,7 @@ class UserLoginView(IsUserAuthenticatedMixin, TemplateView):
 class UserRegisterView(IsUserAuthenticatedMixin, TemplateView):
     template_name = "account/register.html"
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy("users:login")
+    success_url = reverse_lazy("user:login")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -71,6 +71,16 @@ class UserRegisterView(IsUserAuthenticatedMixin, TemplateView):
         return self.render_to_response(context)
 
 
+class UserProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'account/profile.html'
+    login_url = 'users:login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+    
+
+
 class UserLogoutView(LogoutView):
     next_page = "index"
 
@@ -83,7 +93,7 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
         context = super().get_context_data(**kwargs)
         current_user = self.request.user
         
-        users =  User.objects.filter(is_active=True, is_superuser=False).exclude(id=current_user.id).distinct()
+        users = User.objects.filter(is_active=True, is_superuser=False, program_selected=current_user.program_selected).exclude(id=current_user.id).distinct()
         
         unavailable_users = Member.objects.filter(acceptance_status=True).distinct().values_list('user_id', flat=True)
         available_users = users.exclude(id__in=unavailable_users)
@@ -103,10 +113,10 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
                     index+=1
         print(context)
         return context
-    # acceptance logic, email generation, singals for updating member model, UI update when showing 
+    # singals for updating member model, email generation, UI update when showing 
     # waiting -> yellow, accpeted -> green, rejected -> dropbox
     def post(self, request, **kwargs):
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, request=request)
         user = request.user
         print(form.errors)
         if form.is_valid():
@@ -117,10 +127,10 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
                 team = member1.team
             except:
                 team_count = Team.objects.all().count()
-                team = Team.create.object(name = f'Team{team_count+1}')
+                team = Team.objects.create(name = f'Team{team_count+1}')
                 member1 = Member.objects.create(user=user, team=team, acceptance_status=True)
 
-            if member2 is not None and not Member.objects.filter(user=member2, acceptance_status=True):
+            if member2 and not Member.objects.filter(user=member2, acceptance_status=True):
                 member2 = User.objects.get(id=member2)
                 member2 = Member.objects.create(user=member2, team=team)
             

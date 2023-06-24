@@ -63,7 +63,7 @@
             {% if allow_team_creation %}
             <li><a class="nav-link scrollto" href="{% url 'user:create_team' %}" style="font-weight: bold; color: #eb5d1e">Create Team</a></li>
             {% endif %}
-            <li><a class="getstarted scrollto" href="">Dashboard</a></li>
+            <li><a class="getstarted scrollto" href="{% url 'user:profile' %}">Dashboard</a></li>
           {% else %}
           <li><a class="getstarted scrollto" href="{% url 'user:login' %}">Login</a></li>
           {% endif %}
@@ -1452,7 +1452,7 @@
             <ul>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#about2">About us</a></li>
-              <li><i class="bx bx-chevron-right"></i> <a href="#faq">F.A.Q</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#faq">FAQ</a></li>
                <!--<li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
               <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li> -->
             </ul>

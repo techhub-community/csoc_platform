@@ -23,11 +23,11 @@ class AllowTeamCreationMixin:
         return super().dispatch(request, *args, **kwargs)
     
 
-class IndexTemplateView(AllowTeamCreationMixin, TemplateView):
+class IndexTemplateView(TemplateView):
     template_name='landing/index.html'
 
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context['allow_team_creation'] = self.allow_team_creation
-        return context
+    # def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+    #     context = super().get_context_data(**kwargs)
+    #     context['allow_team_creation'] = self.allow_team_creation
+    #     return context
     
