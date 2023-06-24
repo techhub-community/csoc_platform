@@ -102,7 +102,7 @@ background-color: rgba(0, 0, 0, 0.5);"></div>
                   <div class="col-md-12">
                       <div class="form-group first">
                           <label for="text">Member 1</label>
-                          <input type="text" value="{{ user }}" class="form-control" id="member1" name="member1" disabled>
+                          <input type="text" value="{{ user }}" style="background: rgb(150,251,110);background: linear-gradient(90deg, rgba(150,251,110,1) 0%, rgba(41,250,27,1) 43%, rgba(185,255,168,1) 100%);" class="form-control" id="member1" name="member1" disabled>
                       </div>    
                   </div>
               </div>
@@ -111,7 +111,11 @@ background-color: rgba(0, 0, 0, 0.5);"></div>
                       <div class="form-group last mb-3">
                           <label for="password">Member 2</label>
                           {% if member2 %}
-                            <input type="text" value="{{ member2.user }}" class="form-control" id="member1" name="member1" disabled>
+                            {% if member2.acceptance_status %}
+                              <input type="text" value="{{ member2.user }}" class="form-control" style="background: rgb(150,251,110);background: linear-gradient(90deg, rgba(150,251,110,1) 0%, rgba(41,250,27,1) 43%, rgba(185,255,168,1) 100%);" id="member1" name="member1" disabled>
+                            {% else %}
+                              <input type="text" value="{{ member2.user }}" class="form-control bg-warning" style="background: rgb(251,246,110);background: linear-gradient(90deg, rgba(251,246,110,1) 0%, rgba(239,250,27,1) 43%, rgba(255,253,168,1) 100%);" id="member1" name="member1" disabled>
+                            {% endif %}
                           {% else %}
                             <select class="form-control" id="website" name="member2">
                               <option value="">None</option>
@@ -128,7 +132,11 @@ background-color: rgba(0, 0, 0, 0.5);"></div>
                       <div class="form-group last mb-3">
                           <label for="password">Member 3</label>
                           {% if member3 %}
-                            <input type="text" value="{{ member3.user }}" class="form-control" id="member1" name="member1" disabled>
+                            {% if member3.acceptance_status %}
+                              <input type="text" value="{{ member3.user }}" class="form-control" style="background: rgb(150,251,110);background: linear-gradient(90deg, rgba(150,251,110,1) 0%, rgba(41,250,27,1) 43%, rgba(185,255,168,1) 100%);" id="member1" name="member1" disabled>
+                            {% else %}
+                              <input type="text" value="{{ member3.user }}" class="form-control bg-warning" style="background: rgb(251,246,110);background: linear-gradient(90deg, rgba(251,246,110,1) 0%, rgba(239,250,27,1) 43%, rgba(255,253,168,1) 100%);" id="member1" name="member1" disabled>
+                            {% endif %}
                           {% else %}
                             <select class="form-control" id="website" name="member3">
                               <option value="">None</option>

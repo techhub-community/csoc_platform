@@ -26,8 +26,15 @@ class AllowTeamCreationMixin:
 class IndexTemplateView(TemplateView):
     template_name='landing/index.html'
 
-    # def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-    #     context = super().get_context_data(**kwargs)
-    #     context['allow_team_creation'] = self.allow_team_creation
-    #     return context
-    
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated:
+            member = Member.objects.filter(user=user, acceptance_status=True).distinct()
+            try:
+                team = member.first().team 
+                member_count = Member.objects.filter(team=team, acceptance_status=True).distinct().count()
+            except:
+                member_count = 0
+            context['allow_team_creation'] = member_count < 3
+        return context
