@@ -87,34 +87,49 @@
     </div>
     </div>
     </div>
-  <div class="d-lg-flex" style="background: #FEF8F4";">
+  <div class="d-lg-flex" style="background: #FEF8F4";>
       <div class="container mt-5">
         <div class="row align-items-center justify-content-center">
           <div class="col-md-9 py-5">
             <div class="p-4 border border-5" style="background-color: #FFFFFF">
             <p class="mb-4"></p>
             <form method="post" style="background-color: #FFFFFF">
-              {% csrf_token %}
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="form-group first">
-                          <label for="email">Email Address</label>
-                          <input type="email" class="form-control" placeholder="e.g. john@your-domain.com" id="email" name="email">
-                      </div>    
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="form-group last mb-3">
-                          <label for="password">Password</label>
-                          <input type="password" name="password" class="form-control" placeholder="Your Password" id="password">
-                      </div>
-                  </div>
-              </div>
-              <div class="d-flex mb-2 mt-4 align-items-center">
-              </div>
-              <input type="submit" value="Login" class="btn px-5 btn-primary">
-          </form>
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        {% for field_errors in form.errors.values %}
+                            {% for error in field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group first {% if form.email.errors %}has-error{% endif %}">
+                            <label for="email">Email Address</label>
+                            <input type="email" class="form-control" placeholder="e.g. john@your-domain.com" id="email" name="email">
+                            {% if form.email.errors %}
+                                <span class="help-block text-primary" style="font-size: 0.8rem">{{ form.email.errors }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group last {% if form.password.errors %}has-error{% endif %} mb-3">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Your Password" id="password">
+                            {% if form.password.errors %}
+                                <span class="help-block text-primary" style="font-size: 0.8rem">{{ form.password.errors }}</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex mb-2 mt-4 align-items-center">
+                </div>
+                <input type="submit" value="Login" class="btn px-5 btn-primary">
+            </form>            
           
           </div>
         </div>
