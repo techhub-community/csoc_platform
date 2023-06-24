@@ -11,15 +11,17 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.views.generic import View, TemplateView
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.views import PasswordResetView, PasswordChangeView
 from django.views.generic import FormView
 
 from .forms import CustomUserCreationForm, LoginForm, CreateTeamForm
-from .models import Member, User, Program, Team
+from .models import Member, User, Program, Team, Invite
 from csoc_backend.views import AllowTeamCreationMixin
+from django.conf import settings
 
+import random
 
 class IsUserAuthenticatedMixin:
     def dispatch(self, request, *args, **kwargs):
@@ -89,7 +91,18 @@ class UserProfileView(LoginRequiredMixin, TemplateView):
         context['allow_team_creation'] = member_count < 3
         return context
 
+class UserRequestView(LoginRequiredMixin, TemplateView):
+    template_name = 'account/profile.html'
+    login_url = 'user:login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        member = Member.objects.filter(user=user, acceptance_status=False).distinct()
+        context['member'] = member
+        return context
+    
+    
 class UserLogoutView(LogoutView):
     next_page = "index"
 
@@ -143,11 +156,52 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
             if member2 and not Member.objects.filter(user=member2, acceptance_status=True):
                 member2 = User.objects.get(id=member2)
                 member2 = Member.objects.create(user=member2, team=team)
+                invite = Invite.objects.create(sender=member1, receiver=member2, Team=team)
+                invite.save()
             
             if member3 and not Member.objects.filter(user=member3, acceptance_status=True):
                 member3 = User.objects.get(id=member3)
                 member3 = Member.objects.create(user=member3, team=team)
+                invite = Invite.objects.create(sender=member1, receiver=member3, Team=team)
+                invite.save()
 
             return redirect('index')            
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
+    
+class AcceptInviteView(LoginRequiredMixin, AllowTeamCreationMixin, View):
+    def post(self, request, **kwargs):
+        member = Member.objects.get(id=self.kwargs.get('pk'))
+        member.acceptance_status = True
+        member.save()
+        return redirect('index')
+    
+class RejectInviteView(LoginRequiredMixin, AllowTeamCreationMixin, View):
+    def post(self, request, **kwargs):
+        member = Member.objects.get(id=self.kwargs.get('pk'))
+        member.delete()
+        return redirect('index')
+    
+class EmailVerificationView(View):
+    def get(self, request, token):
+        user = self.get_user(token)
+        if user is not None:
+            user.is_active = True
+            user.save()
+            # You can add additional logic here, such as redirecting to a success page
+            return render(request,'email_verify.html',{'page':f"http://{settings.DOMAIN}/user/login/"})
+        else:
+            # Handle invalid token, redirect to an error page or show an error message
+            return render(request,'email_verify_fail.html',{'page':f"http://{settings.DOMAIN}/user/login/"})
+    
+    def get_user(self, token):
+        User = get_user_model()
+        try:
+            uidb64, token = token.split(':')
+            user = User.objects.get(pk=uidb64)
+            if default_token_generator.check_token(user, token):
+                return user
+            
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            pass
+        return None

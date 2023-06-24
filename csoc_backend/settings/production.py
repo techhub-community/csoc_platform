@@ -18,6 +18,16 @@ CSRF_TRUSTED_ORIGINS = [
     'http://64.227.148.114'
 ]
 
+# EMAIL SETTINGS
+EMAIL_BACKEND=os.environ.get('EMAIL_BACKEND')
+EMAIL_HOST=os.environ.get('EMAIL_HOST')
+EMAIL_PORT=os.environ.get('EMAIL_PORT')
+EMAIL_HOST_USER=os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_TLS=os.environ.get('EMAIL_USE_TLS')
+DEFAULT_FROM_EMAIL=os.environ.get('DEFAULT_FROM_EMAIL')
+EMAIL_USE_SSL=os.environ.get('EMAIL_USE_SSL')
+
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
