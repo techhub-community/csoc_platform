@@ -45,6 +45,6 @@ def send_verification_email(user, created):
         subject = 'Email Verification'
         recipient_list = [user.email]
         print(verification_url)
-        html_message = render_to_string('email_confirm_template', {'verification_url': verification_url})
+        html_message = render_to_string('email_confirm_template.html', {'verification_url': verification_url})
         
         send_mail(subject, '', 'codeshackcommunity@gmail.com', recipient_list, html_message=html_message)
