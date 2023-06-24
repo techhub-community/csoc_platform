@@ -53,7 +53,7 @@ class UserLoginView(IsUserAuthenticatedMixin, TemplateView):
 class UserRegisterView(IsUserAuthenticatedMixin, TemplateView):
     template_name = "account/register.html"
     form_class = CustomUserCreationForm
-    success_url = reverse_lazy("users:login")
+    success_url = reverse_lazy("user:login")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -69,6 +69,16 @@ class UserRegisterView(IsUserAuthenticatedMixin, TemplateView):
             return redirect('index')
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
+
+
+class UserProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'account/profile.html'
+    login_url = 'users:login'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+    
 
 
 class UserLogoutView(LogoutView):
