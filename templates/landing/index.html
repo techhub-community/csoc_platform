@@ -55,14 +55,10 @@
         <ul>
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About Us</a></li>
-         
           <li><a class="nav-link scrollto" href="#services">Timeline</a></li>
           <li><a class="nav-link scrollto" href="#portfolio">Team</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
           {% if request.user.is_authenticated %}
-            {% if allow_team_creation %}
-            <li><a class="nav-link scrollto" href="{% url 'user:create_team' %}" style="font-weight: bold; color: #eb5d1e">Create Team</a></li>
-            {% endif %}
             <li><a class="getstarted scrollto" href="{% url 'user:profile' %}">Dashboard</a></li>
           {% else %}
           <li><a class="getstarted scrollto" href="{% url 'user:login' %}">Login</a></li>

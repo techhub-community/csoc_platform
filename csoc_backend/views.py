@@ -1,5 +1,3 @@
-from typing import Any, Dict
-from django.views.generic import TemplateView
 from django.shortcuts import redirect
 from user.models import Member
 
@@ -21,20 +19,3 @@ class AllowTeamCreationMixin:
                 return redirect("index")
 
         return super().dispatch(request, *args, **kwargs)
-    
-
-class IndexTemplateView(TemplateView):
-    template_name='landing/index.html'
-
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        user = self.request.user
-        if user.is_authenticated:
-            member = Member.objects.filter(user=user, acceptance_status=True).distinct()
-            try:
-                team = member.first().team 
-                member_count = Member.objects.filter(team=team, acceptance_status=True).distinct().count()
-            except:
-                member_count = 0
-            context['allow_team_creation'] = member_count < 3
-        return context
