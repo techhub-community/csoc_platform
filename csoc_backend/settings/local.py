@@ -1,13 +1,15 @@
+import dotenv
 import os
 from pathlib import Path
 from .base import *
 
+dotenv.load_dotenv() 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'c_r-e8v1divj8y+hu@-w=n#$xj#ciuejybd3_(k2h789(mcv8$'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -26,8 +28,15 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+# Email Settings
+EMAIL_BACKEND=os.getenv('EMAIL_BACKEND')
+EMAIL_HOST=os.getenv('EMAIL_HOST')
+EMAIL_PORT=os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER=os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=os.getenv('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_TLS=os.getenv('EMAIL_USE_TLS')
+DEFAULT_FROM_EMAIL=os.getenv('DEFAULT_FROM_EMAIL')
+EMAIL_USE_SSL=os.getenv('EMAIL_USE_SSL')
 
 
 # Database
