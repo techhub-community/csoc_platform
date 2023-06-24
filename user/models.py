@@ -48,3 +48,16 @@ class Member(models.Model):
     user = models.ForeignKey("user.User", verbose_name=_(""), null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
     team = models.ForeignKey(Team, verbose_name=_(""), on_delete=models.CASCADE)
     acceptance_status = models.BooleanField(_(""), default=False)
+
+    class Meta:
+        unique_together = (("user", "team"))
+
+    def clean(self):
+        super().clean()
+        accepted_count = Member.objects.filter(team=self.team, acceptance_status=True).count()
+        if accepted_count >= 3:
+            raise ValidationError("The team already has three accepted members.")
+
+    def save(self, *args, **kwargs):
+        self.clean()
+        super().save(*args, **kwargs)
