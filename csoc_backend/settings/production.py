@@ -12,8 +12,11 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['64.227.148.114']
+ALLOWED_HOSTS = ['64.227.148.114','django']
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://64.227.148.114'
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
