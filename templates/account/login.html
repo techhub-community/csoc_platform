@@ -13,7 +13,7 @@
 
   <!-- Favicons -->
   <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
-  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+  <link href="{% static 'assets/img/favicon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
@@ -56,11 +56,9 @@
          <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo3.png' %}" alt="" class="img-fluid" height="1000px" width="180px"></a>
       </div>
 
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="getstarted scrollto" href="{% url 'user:register' %}">Register</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
+      <nav id="navbar" class="navbar2">
+          <a class="getstarted scrollto" href="{% url 'user:register' %}">Register</a>
+        <!-- <i class="bi bi-list mobile-nav-toggle"></i> -->
       </nav><!-- .navbar -->
 
     </div>
@@ -80,10 +78,10 @@
     <div class="d-flex justify-content-start align-items-center h-100">
       <div class="text-white">
         <div class="row">
-          <h1 class="col-lg-6 offset-lg-6 col-md-8 offset-md-5 col-10 offset-5" style="margin-top: 16vh;"><b>LogIn</b></h1>
+          <h1 class="text-center text-lg-right col-lg-6 offset-lg-8 col-md-8 offset-md-2 col-10 offset-1" style="margin-top: 16vh;"><b>LogIn</b></h1>
         </div>
         <div class="row">
-          <h2 class="col-md-8 offset-md-2 col-10 offset-1" style="margin-left: 15vh;"><a href="{% url 'index' %}" style="color: white;" onmouseover="this.style.color=''" onmouseout="this.style.color='white'">Home</a>/<a href="" style="color: white;" onmouseover="this.style.color=''" onmouseout="this.style.color='white'">LogIn</a></h2>
+          <h2 class="text-center text-lg-right col-lg-6 offset-lg-8 col-md-8 offset-md-2 col-10 offset-1" style=""><a href="{% url 'index' %}" style="color: white;" onmouseover="this.style.color=''" onmouseout="this.style.color='white'">Home</a>/<a href="" style="color: white;" onmouseover="this.style.color=''" onmouseout="this.style.color='white'">LogIn</a></h2>
         </div>
       </div>  
     </div>
