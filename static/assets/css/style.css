@@ -238,7 +238,18 @@ h6,
     left: -100%;
   }
 }
-
+.navbar2 .getstarted{
+  background: #eb5d1e;
+  color: #fff;
+  padding: 10px 25px;
+  margin-left: 30px;
+  border-radius: 50px;
+}
+.navbar2 .getstarted:hover,
+.navbar2 .getstarted:focus:hover{
+  color: #fff;
+  background: #ee7843;
+}
 /**
 * Mobile Navigation 
 */
@@ -254,6 +265,7 @@ h6,
 .mobile-nav-toggle.bi-x {
   color: #fff;
 }
+
 
 @media (max-width: 991px) {
   .mobile-nav-toggle {
@@ -346,6 +358,8 @@ h6,
 .navbar-mobile .dropdown>.dropdown-active {
   display: block;
 }
+
+
 
 /*--------------------------------------------------------------
 # Hero Section
