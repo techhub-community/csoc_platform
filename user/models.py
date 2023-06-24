@@ -61,3 +61,8 @@ class Member(models.Model):
     def save(self, *args, **kwargs):
         self.clean()
         super().save(*args, **kwargs)
+        
+class Invite(models.Model):
+    sender=models.ForeignKey(Member,verbose_name=_(""), on_delete=models.CASCADE,related_name="sender")
+    receiver=models.ForeignKey(Member,verbose_name=_(""), on_delete=models.CASCADE,related_name="receiver")
+    Team=models.ForeignKey(Team,verbose_name=_(""), on_delete=models.CASCADE)
