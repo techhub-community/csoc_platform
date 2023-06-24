@@ -29,6 +29,8 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'user.User'
 
+LOGIN_URL = 'user:login'
+
 # Application definition
 
 INSTALLED_APPS = [

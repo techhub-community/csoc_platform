@@ -73,16 +73,17 @@ class UserRegisterView(IsUserAuthenticatedMixin, TemplateView):
 
 class UserProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'account/profile.html'
-    login_url = 'users:login'
+    login_url = 'user:login'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        team = Member.objects.filter(user=user)
-        context['team'] = team
-        context['team_members'] = Member.objects.filter(team=team.first(), acceptance_status=True) if team else None
+        team = Member.objects.filter(user=user, acceptance_status=True)
+        if team:
+            team = team.first().team
+            context['team'] = team
+            context['team_members'] = Member.objects.filter(team=team, acceptance_status=True) if team else []
         return context
-    
 
 
 class UserLogoutView(LogoutView):
@@ -92,6 +93,7 @@ class UserLogoutView(LogoutView):
 class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateView):
     template_name = "account/create_team.html"
     form_class = CreateTeamForm
+    login_url = 'user:login'
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
