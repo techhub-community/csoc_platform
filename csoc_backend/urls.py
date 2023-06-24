@@ -4,9 +4,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 from django.views.generic import TemplateView
+from .views import IndexTemplateView as ITV
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='landing/index.html'), name='index'),
+    path('', ITV.as_view(), name='index'),
     path('user/', include('user.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

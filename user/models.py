@@ -45,6 +45,6 @@ class Team(models.Model):
 
 # while accepting make sure that accepting from any team is not true
 class Member(models.Model):
-    user = models.ForeignKey("user.User", verbose_name=_(""), null=True, default=None, on_delete=models.SET_DEFAULT)
+    user = models.ForeignKey("user.User", verbose_name=_(""), null=True, blank=True, default=None, on_delete=models.SET_DEFAULT)
     team = models.ForeignKey(Team, verbose_name=_(""), on_delete=models.CASCADE)
-    acceptance_status = models.BooleanField(_(""))
+    acceptance_status = models.BooleanField(_(""), default=False)
