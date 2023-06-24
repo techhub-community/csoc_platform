@@ -17,6 +17,8 @@ def send_invite_email(sender, instance, created, **kwargs):
     if created:
         subject = 'Team-Invitation'
         recipient_list = [instance.receiver.user.email]
-        html_message = render_to_string('invite_email_template.html', {'sender_name': f'{instance.sender.user.first_name} {instance.sender.user.last_name}','user':instance.receiver.user.first_name, 'domain':settings.DOMAIN})
+        image_url = f'{settings.DOMAIN}/static/assets/img/banner.png'
+        invite_url = f'{settings.DOMAIN}/profile/request/'
+        html_message = render_to_string('invite_email_template.html', {'sender_name': f'{instance.sender.user.first_name} {instance.sender.user.last_name}','user':instance.receiver.user.first_name, 'image_url':image_url, 'invite_url':invite_url})
 
         send_mail(subject, '', 'codeshackcommunity@gmail.com', recipient_list, html_message=html_message)
