@@ -89,7 +89,18 @@ class UserProfileView(LoginRequiredMixin, TemplateView):
         context['allow_team_creation'] = member_count < 3
         return context
 
+class UserRequestView(LoginRequiredMixin, TemplateView):
+    template_name = 'account/profile.html'
+    login_url = 'user:login'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        member = Member.objects.filter(user=user, acceptance_status=False).distinct()
+        context['member'] = member
+        return context
+    
+    
 class UserLogoutView(LogoutView):
     next_page = "index"
 
