@@ -2,3 +2,20 @@
     border-color: #ef7f4d;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(249, 249, 249, 0.6);
   }
+
+  .p-5 mt-4 container {
+    display: block;
+    width: 100%;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .test {
+      width: 50%;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .test {
+      width: 33.33%;
+    }
+  }
