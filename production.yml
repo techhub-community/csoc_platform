@@ -1,0 +1,44 @@
+version: '3.8'
+
+volumes:
+  csoc_postgres_data: {}
+  static:
+
+services:
+  postgres:
+    image: postgres
+    container_name: csoc_postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - csoc_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+  django_gunicorn:
+    image: csoc_django_gunicorn
+    restart: always
+    links:
+      - postgres:postgres
+    volumes:
+      - .:/app:z
+      - ./static:/app/static
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: ./compose/production/django/Dockerfile
+    container_name: csoc_django_gunicorn
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+  nginx:
+    build: ./compose/production/nginx
+    volumes:
+      - ./static:/app/static
+    ports:
+      - "80:80"
+    depends_on:
+      - django_gunicorn
