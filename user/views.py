@@ -154,7 +154,7 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
             if member2 and not Member.objects.filter(user=member2, acceptance_status=True):
                 member2 = User.objects.get(id=member2)
                 member2 = Member.objects.create(user=member2, team=team)
-                invite = Invite.objects.create(sender=member1, receiver=member2, team=team)
+                invite = Invite.objects.create(sender=member1, receiver=member2, Team=team)
                 invite.save()
             
             if member3 and not Member.objects.filter(user=member3, acceptance_status=True):
