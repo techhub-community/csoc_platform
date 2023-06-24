@@ -1,0 +1,36 @@
+body{
+    background: #f7f7ff;
+    margin-top:20px;
+    border: rgb(243, 243, 243);
+     
+     
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #ffff;
+    background-clip: border-box;
+    border: 0 solid transparent;
+    border-radius: .25rem;
+    margin-bottom: 1.5rem;
+    /*box-shadow: 0 2px 6px 0 rgb(237, 139, 65), 0 2px 6px 0 rgba(207, 135, 52, 0.54);*/
+    padding-top: 15px;
+    margin-top: 20px;
+    padding-bottom: 15px;
+    
+    
+}
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #e9ecef;
+  opacity: 0.8;
+  box-shadow: 0 0 5px burlywood;
+}
+
+
+.me-2 {
+    margin-right: .5rem!important;
+}
