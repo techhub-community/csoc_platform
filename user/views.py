@@ -1,7 +1,7 @@
 import threading
 from typing import Any, Dict
-from django import http
 
+from django import http
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LogoutView
 from django.utils.decorators import method_decorator
@@ -16,8 +16,9 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.views import PasswordResetView, PasswordChangeView
 from django.views.generic import FormView
 
-from .forms import CustomUserCreationForm, LoginForm
-from .models import Member, User, Program
+from .forms import CustomUserCreationForm, LoginForm, CreateTeamForm
+from .models import Member, User, Program, Team
+from csoc_backend.views import AllowTeamCreationMixin
 
 
 class IsUserAuthenticatedMixin:
@@ -74,15 +75,59 @@ class UserLogoutView(LogoutView):
     next_page = "index"
 
 
-class UserCreateTeamView(LoginRequiredMixin, TemplateView):
+class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateView):
     template_name = "account/create_team.html"
+    form_class = CreateTeamForm
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         current_user = self.request.user
+        
         users =  User.objects.filter(is_active=True, is_superuser=False).exclude(id=current_user.id).distinct()
+        
         unavailable_users = Member.objects.filter(acceptance_status=True).distinct().values_list('user_id', flat=True)
         available_users = users.exclude(id__in=unavailable_users)
+        
         context['available_users'] = available_users
+        
+        context['member2'] = None
+        context['member3'] = None 
+        if Member.objects.filter(user=current_user, acceptance_status=True):
+            team = Member.objects.filter(user=current_user, acceptance_status=True).first().team
+            members = Member.objects.filter(team=team)
+            index = 2
+            for member in members:
+                print(f'{index} {member.user}')
+                if member.user.id != current_user.id:
+                    context[f'member{index}'] = member
+                    index+=1
+        print(context)
         return context
-    
+    # acceptance logic, email generation, singals for updating member model, UI update when showing 
+    # waiting -> yellow, accpeted -> green, rejected -> dropbox
+    def post(self, request, **kwargs):
+        form = self.form_class(request.POST)
+        user = request.user
+        print(form.errors)
+        if form.is_valid():
+            member2 = form.cleaned_data.get('member2')
+            member3 = form.cleaned_data.get('member3')
+            try:
+                member1 = Member.objects.get(user=user, acceptance_status=True)
+                team = member1.team
+            except:
+                team_count = Team.objects.all().count()
+                team = Team.create.object(name = f'Team{team_count+1}')
+                member1 = Member.objects.create(user=user, team=team, acceptance_status=True)
+
+            if member2 is not None and not Member.objects.filter(user=member2, acceptance_status=True):
+                member2 = User.objects.get(id=member2)
+                member2 = Member.objects.create(user=member2, team=team)
+            
+            if member3 and not Member.objects.filter(user=member3, acceptance_status=True):
+                member3 = User.objects.get(id=member3)
+                member3 = Member.objects.create(user=member3, team=team)
+
+            return redirect('index')            
+        context = self.get_context_data(**kwargs)
+        return self.render_to_response(context)
