@@ -78,11 +78,15 @@ class UserProfileView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user = self.request.user
-        team = Member.objects.filter(user=user, acceptance_status=True)
-        if team:
-            team = team.first().team
+        member = Member.objects.filter(user=user, acceptance_status=True).distinct()
+        try:
+            team = member.first().team
             context['team'] = team
+            member_count = Member.objects.filter(team=team, acceptance_status=True).distinct().count()
             context['team_members'] = Member.objects.filter(team=team, acceptance_status=True) if team else []
+        except:
+            member_count = 0
+        context['allow_team_creation'] = member_count < 3
         return context
 
 
