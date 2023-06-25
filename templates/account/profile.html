@@ -52,6 +52,21 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="{% static 'assets/css/style3.css' %}">
+  <style>
+    .navbar-container{
+      flex: 1;
+    }
+    .navbar2{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      list-style: none;
+      justify-content: flex-end;
+      margin-top: auto;
+      margin-bottom: auto;
+      
+    }
+  </style>
 </head>
 <body>
 
@@ -62,19 +77,20 @@
       <div class="logo">
        <!-- <h1 class="text-light"><a href="index.html"><img src=""></a></h1>  -->
         <!-- Uncomment below if you prefer to use an image logo -->
-         <a href=""><img src="{% static 'assets/img/logo3.png' %}" alt="" class="img-fluid" height="1000px" width="180px"></a>
+         <a href="{% url 'index' %}"><img src="{% static 'assets/img/logo3.png' %}" alt="" class="img-fluid" height="1000px" width="180px"></a>
       </div>
 
-      <nav id="navbar" class="navbar">
-        <ul>
-          {% if allow_team_creation %}
-            <li><a class="nav-link scrollto" href="{% url 'user:create_team' %}" style="font-weight: bold; color: #eb5d1e">Create Team</a></li>
+      <nav id="navbar2" class="navbar-container">
+        
+        <ul class="navbar2">
+           {% if allow_team_creation %}
+          <li><a class="nav-link scrollto" href="{% url 'user:create_team' %}" style="font-weight: bold; color: #eb5d1e;min-width: fit-content;">Create Team</a></li>
           {% endif %}
           {% if request.user.is_authenticated %}
-            <li><a class="getstarted scrollto" href="{% url 'user:logout' %}">Logout</a></li>
-          {% endif %}
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
+          <li><a class="getstarted scrollto" href="{% url 'user:logout' %}" style="min-height: fit-content;">Logout</a></li>
+          {% endif %} 
+        </ul> 
+        <!-- <i class="bi bi-list mobile-nav-toggle"></i> -->
       </nav><!-- .navbar -->
 
     </div>
