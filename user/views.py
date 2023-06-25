@@ -1,5 +1,6 @@
 import threading
 from typing import Any, Dict
+from loguru import logger
 
 from django import http
 from django.shortcuts import render, redirect
@@ -22,21 +23,6 @@ from csoc_backend.views import AllowTeamCreationMixin
 from django.conf import settings
 from django.core.mail import send_mail
 from django.http import HttpResponse
-
-def submit_contact(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        subject = request.POST.get('subject')
-        message = request.POST.get('message')
-        inquiry=Inquiry.objects.create(name=name,email=email,subject=subject,message=message)
-        inquiry.save()
-        # Redirect to a success page or do any other necessary handling
-          # Assuming you have a 'success' named URL pattern
-    
-
-    # Render the form template if not a POST request or form submission fails
-    return HttpResponse('OK',status=200)
 
 
 class IsUserAuthenticatedMixin:
@@ -148,8 +134,7 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
                     index+=1
         print(context)
         return context
-    # email generation, UI update when showing 
-    # waiting -> yellow, accpeted -> green, rejected -> dropbox
+
     def post(self, request, **kwargs):
         form = self.form_class(request.POST, request=request)
         user = request.user
@@ -176,36 +161,50 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
                 member3 = Member.objects.create(user=member3, team=team)
                 invite = Invite.objects.create(sender=member1, receiver=member3, Team=team)
                 invite.save()
-
             return redirect('index')            
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
-    
+
+ 
 class AcceptInviteView(LoginRequiredMixin, AllowTeamCreationMixin, View):
     def get(self, request, **kwargs):
-        member = Member.objects.get(id=self.kwargs.get('pk'))
-        if request.user == member.user:
-            member.acceptance_status = True
-            member.save()
+        try:
+            member = Member.objects.get(id=self.kwargs.get('pk'))
+            if request.user == member.user:
+                member.acceptance_status = True
+                member.save()
+            else:
+                logger.info("request user does not match member user, its not there account")
+        except:
+            logger.info(f"Member does not exit {pk}") 
         return redirect('user:profile')
     
+
 class RejectInviteView(LoginRequiredMixin, AllowTeamCreationMixin, View):
     def get(self, request, **kwargs):
-        member = Member.objects.get(id=self.kwargs.get('pk'))
-        if request.user == member.user:
-            member.delete()
+        try:
+            member = Member.objects.get(id=self.kwargs.get('pk'))
+            if request.user == member.user:
+                member.delete()
+            else:
+                logger.info("request user does not match member user, its not there account")
+        except:
+            logger.info(f"Member does not exit {pk}")
         return redirect('user:profile')
     
+
 class EmailVerificationView(View):
     def get(self, request, token):
         user = self.get_user(token)
         if user is not None:
             user.is_active = True
+            logger.info(f"{user} is now verified")
             user.save()
             # You can add additional logic here, such as redirecting to a success page
             # {% url 'user:login' %}
             return render(request,'email_verify.html',{'page': reverse_lazy("user:login")})
         else:
+            logger.info(f"{user} is cannot be verified, maybe already verified")
             # Handle invalid token, redirect to an error page or show an error message
             return render(request,'email_verify_fail.html',{'page': reverse_lazy("user:login")})
     
@@ -216,7 +215,21 @@ class EmailVerificationView(View):
             user = User.objects.get(pk=uidb64)
             if default_token_generator.check_token(user, token):
                 return user
-            
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            pass
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist) as e:
+            logger.info(f"{e} for token {token}")
         return None
+
+
+def submit_contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        inquiry=Inquiry.objects.create(name=name,email=email,subject=subject,message=message)
+        inquiry.save()
+        # Redirect to a success page or do any other necessary handling
+        # Assuming you have a 'success' named URL pattern    
+
+    # Render the form template if not a POST request or form submission fails
+    return HttpResponse('OK',status=200)
