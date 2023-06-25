@@ -8,6 +8,7 @@ import threading
 from django.core.mail import EmailMessage
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth import get_user_model
+from django.urls import reverse_lazy
 
 @receiver(post_save, sender=Member)
 def delete_duplicate_members(sender, instance, **kwargs):
@@ -30,8 +31,8 @@ def send_mail_func(sender, instance, created, **kwargs):
     if created:
         subject = 'Team-Invitation'
         recipient_list = [instance.receiver.user.email]
-        image_url = f'http://{settings.DOMAIN}/static/assets/img/banner.png'
-        invite_url = f'http://{settings.DOMAIN}/user/profile/request/'
+        image_url = f'https://{settings.DOMAIN}/static/assets/img/banner.png'
+        invite_url = reverse_lazy("user:profile")
         html_message = render_to_string('invite_email_template.html', {'sender_name': f'{instance.sender.user.first_name} {instance.sender.user.last_name}','user':instance.receiver.user.first_name, 'image_url':image_url, 'invite_url':invite_url})
 
         send_mail(subject, '', 'codeshackcommunity@gmail.com', recipient_list, html_message=html_message)
@@ -41,7 +42,8 @@ def send_verification_email(user, created):
     if created:
         token = default_token_generator.make_token(user)
         uid = user.pk
-        verification_url = f"http://{settings.DOMAIN}/user/verify-email/{uid}:{token}/"
+        pk=f"{uid}:{token}"
+        verification_url = reverse_lazy("user:email_verification", args=[pk])
         subject = 'Email Verification'
         recipient_list = [user.email]
         print(verification_url)

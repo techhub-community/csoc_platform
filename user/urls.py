@@ -6,7 +6,6 @@ from .views import (
     UserLogoutView, 
     UserCreateTeamView, 
     UserProfileView,
-    UserRequestView,
     AcceptInviteView,
     RejectInviteView,
     EmailVerificationView
@@ -20,7 +19,6 @@ urlpatterns = [
     path('logout/', UserLogoutView.as_view(), name='logout'),
     path('profile/', UserProfileView.as_view(template_name='account/profile.html'), name='profile'),
     path('create/team/', UserCreateTeamView.as_view(), name='create_team'),
-    path('profile/request/', UserRequestView.as_view(template_name='account/profile_request.html'), name='profile_request'),
     path('invite/accept/<int:pk>/', AcceptInviteView.as_view(), name='invite_accept'),
     path('invite/decline/<int:pk>/', RejectInviteView.as_view(), name='invite_decline'),
     path('verify-email/<str:token>/', EmailVerificationView.as_view(), name='email_verification'),

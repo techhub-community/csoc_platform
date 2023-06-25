@@ -48,6 +48,66 @@
       background-color: #FA761B;
       border-color: #FA761B;
     }  
+
+
+    .textfield{
+         background-color: #000000; 
+         border:none;
+         padding-bottom: 20px;
+    }
+ 
+
+
+  .scroll-container {
+    background-color: transparent; 
+    height: 207px; /* Set the desired height of the container */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+
+    overflow-y: scroll; /* Enable vertical scrolling */
+  }
+
+
+
+  @media only screen and (min-width: 768px) {
+    .p-5 mt-4 container {
+      width: 50%;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .p-5 mt-4 container {
+      width: 33.33%;
+    }
+  }
+
+@media only screen and (min-width: 768px) {
+  .test {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .test {
+    width: 33.33%;
+  }
+  }
+
+@media only screen and (min-width: 320px) {
+.col-lg-2 col-sm-6 {
+  padding-top: 10px;
+
+}
+
+.transparent-input {
+  background-color: #000000; 
+  border:none;
+  padding-bottom: 20px;
+}
+
+
+
+}
+
   </style>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -80,23 +140,31 @@
     </div>
   </header><!-- End Header -->
 
-  <div class="p-5 mt-4 container">
+  <div class="p-lg-5 p-sm-0 mt-5 container">
 		<div class="main-body">
-			<div class="row">
-				<div class="col-lg-4">
-					<div class="card" style="background-color: #fef8f5;">
+
+			<div class="row ml-0 ">
+        <div class="row ml-0 mr-0">
+				<div class="col-lg-3">
+          <div class="row">
+					<div class="card" style="background-color: #fef8f5;  margin-top: 20px">
 						<div class="card-body">
 							<div class="d-flex flex-column align-items-center text-center">
-								<img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                <svg xmlns="http://www.w3.org/2000/svg" height="180" width="180" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ef7f4d}</style><path d="M399 384.2C376.9 345.8 335.4 320 288 320H224c-47.4 0-88.9 25.8-111 64.2c35.2 39.2 86.2 63.8 143 63.8s107.8-24.7 143-63.8zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm256 16a72 72 0 1 0 0-144 72 72 0 1 0 0 144z"/></svg>
 								<div class="mt-3">
-									<h4>John Doe</h4>
+									<h4><br>{{user.first_name}} {{user.last_name}}<br></h4>
 									<p class="text-secondary mb-1">{{ user.program_selected.name }}</p>
-									<p class="text-muted font-size-sm">{{ team.name }}</p>
+									<p class="text-muted font-size-lg">{{ team.name }}</p>
 									
 								</div>
 							</div>
+
+
+              
 							
 
+
+              
 
 								<li class="list-group-item d-flex justify-content-center align-items-center flex-wrap">
 									<h5 class="mb-0  align-middle"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github me-2 icon-inline"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>Github</h5>
@@ -106,9 +174,50 @@
 							</ul>
 						</div>
 					</div>
+
+
+
+          <div class="card mt-1" style="background-color: #fef8f5;">
+						<div class="card-body">
+							
+                  
+									<h3>Team Members<br></h3>
+									<p class="text-secondary mb-1">{{ user.program_selected.name }}</p>
+									<p class="text-muted font-size-lg">{{ team.name }}</p>
+                {% for member in team_members %}    
+              <div class="row mb-3">
+              <div class="col-lg-9" style="margin-top: 15px">
+                <h6>Member {{ forloop.counter }}</h6>
+              </div>
+              <div class="col-lg-12 text-secondary" style="margin-top: 8px">
+                <input type="text" class="form-control" value="{{ member.user }}" readonly style="background-color: white; color: black; margin-bottom: 10px;" readonly>
+              </div>
+            </div>
+            {% endfor %}
+
+
+       
+      
+								</div>
+							</div>
+
+
+              
+							
+
+
+              
+
+							
+						</div>
+
+
+       
+
+
 				</div>
-				<div class="col-lg-8">
-					<div class="card " style="background-color: #fef8f5;">
+				<div class="col-lg-9">
+					<div class="card " style="background-color: #fef8f5; margin-bottom: 0px">
 						<div class="card-body">
 
  
@@ -118,14 +227,14 @@
 
 
               <div class="row mb-3">
-                <div class="col-md-6">
-                  <label for="FirstName" class="form-label"><h6 >First Name</h6></label>
-                  <input type="text" name="firstName" class="form-control bg-white" value="{{ user.first_name }}" id="firstName" readonly>
-                  <span class="formerror" id="error"></span>
+                <div class="col-lg-6">
+                  <label for="FirstName" class="form-label mb-0"><h6 >First Name</h6></label>
+                  <input type="text" name="firstName" class="form-control bg-white mb-3" value="{{ user.first_name }}" id="firstName" readonly>
+                <!--  <span class="formerror" id="error"></span> -->
                 </div>
               
-                <div class="col-md-6">
-                  <label for="LastName" class="form-label"><h6 >Last Name</h6></label>
+                <div class="col-lg-6">
+                  <label for="LastName" class="form-label mb-0"><h6 >Last Name</h6></label>
                   <input type="text" class="form-control bg-white"  value="{{ user.last_name }}" id="lastName" readonly>
                 </div>
               </div>
@@ -134,20 +243,20 @@
 
 
             <div class="row mb-3">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Email</h6>
+              <div class="col-lg-3">
+                <h6 class="mb-1">Email</h6>
               </div>
-              <div class="col-sm-9 text-secondary">
+              <div class="col-lg-9 text-secondary">
                 <input type="text" class="form-control" value="{{ user.email }}"  style="background-color: white; color: black;" readonly>
               </div>
             </div>
 
 
              <div class="row mb-3">
-              <div class="col-sm-3">
-                <h6 class="mb-0">USN</h6>
+              <div class="col-lg-3">
+                <h6 class="mb-1">USN</h6>
               </div>
-              <div class="col-sm-9 text-secondary">
+              <div class="col-lg-9 text-secondary">
                 <input type="text" class="form-control" value="{{ user.usn }}"  style="background-color: white; color: black;" readonly>
               </div>
             </div>
@@ -158,10 +267,10 @@
 
 
 							<div class="row mb-3">
-								<div class="col-sm-3">
-									<h6 class="mb-0">Phone Number</h6>
+								<div class="col-lg-3">
+									<h6 class="mb-1">Phone Number</h6>
 								</div>
-								<div class="col-sm-9 text-secondary">
+								<div class="col-lg-9 text-secondary">
 									<input type="text" class="form-control" value="{{ user.phone_number }}">
 								</div>
 							</div>
@@ -170,20 +279,20 @@
 
               
              <div class="row mb-3">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Program</h6>
+              <div class="col-lg-3" >
+                <h6 class="mb-2"  >Program</h6>
               </div>
-              <div class="col-sm-9 text-secondary">
+              <div class="col-lg-9 text-secondary">
                 <input type="text" class="form-control" value="{{ user.program_selected.name }}"  style="background-color: white; color: black;" readonly>
               </div>
             </div>
  
               
             <div class="row mb-3">
-              <div class="col-sm-3">
-                <h6 class="mb-0">Your Techstack</h6>
+              <div class="col-lg-3">
+                <h6 class="mb-1">Your Techstack</h6>
               </div>
-              <div class="col-sm-9 text-secondary">
+              <div class="col-lg-9 text-secondary">
                 <input type="text" class="form-control" {% if user.techstack %}value="{{ user.techstack }}"{% endif %} style="background-color: white; color: black;" readonly>
               </div>
             </div>
@@ -191,10 +300,10 @@
 
 
             <div class="row mb-3">
-              <div class="col-sm-3">
+              <div class="col-lg-3">
                 <h6 class="mb-0">Proficiency</h6>
               </div>
-              <div class="col-sm-9 text-secondary">
+              <div class="col-lg-9 text-secondary">
                 <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="techstack" id="specifyColor" value="option1"  {% if user.proficiency == 'BEG' %}checked=true{% else %}disabled{% endif %}>
                   <label class="form-check-label" for="option1">Beginner</label>
@@ -213,29 +322,85 @@
                 </div>
               </div>
             </div>
+        
            
             {% comment %} <div class="row">
-              <div class="col-sm-7"></div>
-              <div class="col-sm-9 text-secondary">
+              <div class="col-lg-7"></div>
+              <div class="col-lg-9 text-secondary">
                 <input type="button" class="btn btn-warning px-4 float-start" style="background-color: rgb(239,127,77); border-color:  rgb(239,127,77); color: white; " value="Save Changes">
               </div>
             </div> {% endcomment %}
-            
-            
+          
         
 						</div>
 					</div>
+        
+
+
           
-          <div class="row">
-            <div class="col-sm-12">
+
+        {% comment %} PENDING REQUEST {% endcomment %}
+          <div class="row mb mt-0">
+
+            <div class="col-lg-12 col-sm-12">
               <div class="card" style="background-color: #fef8f5;">
-                <div class="card-body">
-                  <h3 class="d-flex align-items-center mb-3"><b>Team Members</b></h3>
-                  {% for member in team_members %}
-                    <h6>Member {{ forloop.counter }}</h6>
-                    <input type="text" class="form-control" value="{{ member.user }}" readonly style="background-color: white; color: black; margin-bottom: 10px;">
-                  {% endfor %}
+                <div class="card-body" style="padding-left: 30px">
+                  <h3 class="d-flex align-items-center mb-3">Pending Requests...</h3>
+                  
+
+
+              
+                 
+                  
+                  <div class="scroll-container">
+                    
+
+
+                    {% for request in pending_requests %}
+                  <div class="row" style="margin-top: 20px">
+
+                
+                   
+                    <div class="col-lg-7 mt-sm-2 text-secondary" class="textfield" >
+                      <input type="text" class="form-control" value="{{ request.team.name }}"  style="background-color: white; color: black;" readonly>
+  
+                    </div>
+
+
+                    <div class="col-lg-2 mt-2">
+
+                      <!---->
+                      <?xml version="1.0" ?><a href="http://{{domain}}/user/invite/accept/{{request.pk}}/"><button class="svg-button" style=" background: none; border: none; outline: none; padding: 0;"><svg id="Layer_1" style="enable-background:new 0 0 512 512; margin-top: 2px" height="40" width="40" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><style type="text/css">
+                        .st0{fill:#2BB673;}
+                        .st1{fill:none;stroke:#FFFFFF;stroke-width:30;stroke-miterlimit:10;}
+                      </style><path class="st0" d="M489,255.9c0-0.2,0-0.5,0-0.7c0-1.6,0-3.2-0.1-4.7c0-0.9-0.1-1.8-0.1-2.8c0-0.9-0.1-1.8-0.1-2.7  c-0.1-1.1-0.1-2.2-0.2-3.3c0-0.7-0.1-1.4-0.1-2.1c-0.1-1.2-0.2-2.4-0.3-3.6c0-0.5-0.1-1.1-0.1-1.6c-0.1-1.3-0.3-2.6-0.4-4  c0-0.3-0.1-0.7-0.1-1C474.3,113.2,375.7,22.9,256,22.9S37.7,113.2,24.5,229.5c0,0.3-0.1,0.7-0.1,1c-0.1,1.3-0.3,2.6-0.4,4  c-0.1,0.5-0.1,1.1-0.1,1.6c-0.1,1.2-0.2,2.4-0.3,3.6c0,0.7-0.1,1.4-0.1,2.1c-0.1,1.1-0.1,2.2-0.2,3.3c0,0.9-0.1,1.8-0.1,2.7  c0,0.9-0.1,1.8-0.1,2.8c0,1.6-0.1,3.2-0.1,4.7c0,0.2,0,0.5,0,0.7c0,0,0,0,0,0.1s0,0,0,0.1c0,0.2,0,0.5,0,0.7c0,1.6,0,3.2,0.1,4.7  c0,0.9,0.1,1.8,0.1,2.8c0,0.9,0.1,1.8,0.1,2.7c0.1,1.1,0.1,2.2,0.2,3.3c0,0.7,0.1,1.4,0.1,2.1c0.1,1.2,0.2,2.4,0.3,3.6  c0,0.5,0.1,1.1,0.1,1.6c0.1,1.3,0.3,2.6,0.4,4c0,0.3,0.1,0.7,0.1,1C37.7,398.8,136.3,489.1,256,489.1s218.3-90.3,231.5-206.5  c0-0.3,0.1-0.7,0.1-1c0.1-1.3,0.3-2.6,0.4-4c0.1-0.5,0.1-1.1,0.1-1.6c0.1-1.2,0.2-2.4,0.3-3.6c0-0.7,0.1-1.4,0.1-2.1  c0.1-1.1,0.1-2.2,0.2-3.3c0-0.9,0.1-1.8,0.1-2.7c0-0.9,0.1-1.8,0.1-2.8c0-1.6,0.1-3.2,0.1-4.7c0-0.2,0-0.5,0-0.7  C489,256,489,256,489,255.9C489,256,489,256,489,255.9z" id="XMLID_3_"/><g id="XMLID_1_"><line class="st1" id="XMLID_2_" x1="213.6" x2="369.7" y1="344.2" y2="188.2"/><line class="st1" id="XMLID_4_" x1="233.8" x2="154.7" y1="345.2" y2="266.1"/></g></svg>
+                      </button>
+                    </a>
+                      <a href="http://{{domain}}/user/invite/decline/{{request.pk}}/">
+                      <button class="svg-button" style=" background: none; border: none; outline: none; padding: 0;">
+                      <svg clip-rule="evenodd" fill-rule="evenodd" height="42" width="42" fill="#ff0000" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.002 2.005c5.518 0 9.998 4.48 9.998 9.997 0 5.518-4.48 9.998-9.998 9.998-5.517 0-9.997-4.48-9.997-9.998 0-5.517 4.48-9.997 9.997-9.997zm0 8.933-2.721-2.722c-.146-.146-.339-.219-.531-.219-.404 0-.75.324-.75.749 0 .193.073.384.219.531l2.722 2.722-2.728 2.728c-.147.147-.22.34-.22.531 0 .427.35.75.751.75.192 0 .384-.073.53-.219l2.728-2.728 2.729 2.728c.146.146.338.219.53.219.401 0 .75-.323.75-.75 0-.191-.073-.384-.22-.531l-2.727-2.728 2.717-2.717c.146-.147.219-.338.219-.531 0-.425-.346-.75-.75-.75-.192 0-.385.073-.531.22z" fill-rule="nonzero"/></svg>
+                      </button>
+                    </a>
+                    </div>
+
+
                   </div>
+            
+                <br>
+                {% endfor %}
+
+                
+
+                
+
+
+                  </div>
+               
+
+<!-- Content goes here -->
+</div>
+
+
                 </div>
               </div>
             </div>
