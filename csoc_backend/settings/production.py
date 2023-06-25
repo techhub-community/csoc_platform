@@ -17,7 +17,7 @@ DEBUG = os.getenv('DEBUG')
 ALLOWED_HOSTS = [DOMAIN, 'django']
 
 CSRF_TRUSTED_ORIGINS = [
-    f'http://{DOMAIN}'
+    f'https://{DOMAIN}'
 ]
 
 # EMAIL SETTINGS

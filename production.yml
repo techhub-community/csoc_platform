@@ -38,8 +38,11 @@ services:
     build: ./compose/production/nginx
     volumes:
       - ./static:/app/static
+      - /etc/letsencrypt/live/csoc.codeshack.codes/fullchain.pem:/etc/nginx/certs/fullchain.pem:ro
+      - /etc/letsencrypt/live/csoc.codeshack.codes/privkey.pem:/etc/nginx/certs/privkey.pem:ro
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - django_gunicorn
 
