@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from .base import *
 
+from loguru import logger
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -64,3 +65,23 @@ STATIC_ROOT = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "stream": sys.stdout,
+        },
+        "loguru": {
+            "class": "logging.handlers.WatchedFileHandler",
+            "filename": "/app/logs/django.log",  # Change the path as desired
+        },
+    },
+    "root": {
+        "handlers": ["console", "loguru"],
+        "level": "INFO",
+    },
+}
