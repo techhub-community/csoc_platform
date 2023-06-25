@@ -13,8 +13,13 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DOMAIN = "localhost:8000"
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','localhost:8000','','64.227.148.114','django']
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000'
+]
 
 
 # Internationalization

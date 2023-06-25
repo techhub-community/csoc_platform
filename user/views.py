@@ -98,24 +98,15 @@ class UserProfileView(LoginRequiredMixin, TemplateView):
         user = self.request.user
         member = Member.objects.filter(user=user, acceptance_status=True).distinct()
         try:
-            team = member.first().team
+            team = member.first().team if member.first() else None
             context['team'] = team
             member_count = Member.objects.filter(team=team, acceptance_status=True).distinct().count()
             context['team_members'] = Member.objects.filter(team=team, acceptance_status=True) if team else []
+            context['pending_requests'] = Member.objects.filter(user=user, acceptance_status=False)
+            context['domain']= settings.DOMAIN
         except:
             member_count = 0
         context['allow_team_creation'] = member_count < 3
-        return context
-
-class UserRequestView(LoginRequiredMixin, TemplateView):
-    template_name = 'account/profile.html'
-    login_url = 'user:login'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user = self.request.user
-        member = Member.objects.filter(user=user, acceptance_status=False).distinct()
-        context['member'] = member
         return context
     
     
@@ -186,17 +177,19 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
         return self.render_to_response(context)
     
 class AcceptInviteView(LoginRequiredMixin, AllowTeamCreationMixin, View):
-    def post(self, request, **kwargs):
+    def get(self, request, **kwargs):
         member = Member.objects.get(id=self.kwargs.get('pk'))
-        member.acceptance_status = True
-        member.save()
-        return redirect('index')
+        if request.user == member.user:
+            member.acceptance_status = True
+            member.save()
+        return redirect('user:profile')
     
 class RejectInviteView(LoginRequiredMixin, AllowTeamCreationMixin, View):
-    def post(self, request, **kwargs):
+    def get(self, request, **kwargs):
         member = Member.objects.get(id=self.kwargs.get('pk'))
-        member.delete()
-        return redirect('index')
+        if request.user == member.user:
+            member.delete()
+        return redirect('user:profile')
     
 class EmailVerificationView(View):
     def get(self, request, token):
@@ -205,10 +198,11 @@ class EmailVerificationView(View):
             user.is_active = True
             user.save()
             # You can add additional logic here, such as redirecting to a success page
-            return render(request,'email_verify.html',{'page':f"http://{settings.DOMAIN}/user/login/"})
+            # {% url 'user:login' %}
+            return render(request,'email_verify.html',{'page': reverse_lazy("user:login")})
         else:
             # Handle invalid token, redirect to an error page or show an error message
-            return render(request,'email_verify_fail.html',{'page':f"http://{settings.DOMAIN}/user/login/"})
+            return render(request,'email_verify_fail.html',{'page': reverse_lazy("user:login")})
     
     def get_user(self, token):
         User = get_user_model()
