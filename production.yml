@@ -23,6 +23,7 @@ services:
     volumes:
       - .:/app:z
       - ./static:/app/static
+      - ./logs:/app/logs
     env_file:
       - .env
     build:
