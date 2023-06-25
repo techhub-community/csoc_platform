@@ -127,8 +127,9 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
         users = User.objects.filter(is_active=True, is_superuser=False, program_selected=current_user.program_selected).exclude(id=current_user.id).distinct()
         
         unavailable_users = Member.objects.filter(acceptance_status=True).distinct().values_list('user_id', flat=True)
+        print (unavailable_users)
         available_users = users.exclude(id__in=unavailable_users)
-        
+        print (available_users)
         context['available_users'] = available_users
         
         context['member2'] = None
