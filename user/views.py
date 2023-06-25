@@ -59,7 +59,9 @@ class UserLoginView(IsUserAuthenticatedMixin, TemplateView):
             status = User.objects.filter(email=email)
             if user is not None:
                 login(request, user)
-                return redirect("index")
+                context={'title':"Login Successful",'success_message':"Login successfully.",'alert_type':'success'}
+                return render(request,'landing/index.html',context)
+                # return redirect("index")
             elif status.values() and not status.values()[0]["is_active"]:
                 form.add_error(None, "Your account is not been verified")
             else:
@@ -84,9 +86,12 @@ class UserRegisterView(IsUserAuthenticatedMixin, TemplateView):
         print(form.errors)
         if form.is_valid():
             form.save()
-            return redirect('index')
+            context={'title':"Sign Up Successful",'success_message':"An Verification Mail sent to your Email ID.",'alert_type':'success'}
+            return render(request,'landing/index.html',context)
         context = self.get_context_data(**kwargs)
         context['form'] = form
+        context['error_message'] = [f"Registration failed.\nerrors:{' '.join(form.errors)}"]
+        context['alert_type'] = 'error'
         return self.render_to_response(context)
 
 
