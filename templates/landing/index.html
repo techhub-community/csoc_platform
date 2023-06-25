@@ -29,7 +29,7 @@
   <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
  <!--% static 'assets/css/timeline.css' %-->
   <link rel="stylesheet" href="{% static 'assets/css/timeline.css' %}">
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
   <!-- =======================================================
   * Template Name: Ninestars
   * Updated: May 30 2023 with Bootstrap v5.3.0
@@ -53,10 +53,19 @@
   }
 </style>
 <body>
-  <div id="loading-container">
-   <div  class=" loader spinner-border text-danger" role="status">
-  </div>
-  </div>
+
+  {% if success_message %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+          title: '{{title}}',
+          text: '{{ success_message }}',
+          icon: '{{ alert_type }}',
+          confirmButtonColor:"#eb5d1e"
+        });
+      });
+    </script>
+  {% endif %}
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
@@ -1535,7 +1544,7 @@
 
   <!-- Template Main JS File -->
   <script src="{%static 'assets/js/main.js' %}"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
 </body>
 
 </html>

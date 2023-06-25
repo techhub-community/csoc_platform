@@ -48,6 +48,17 @@
     }
   </style>
   <body  style="background: #FEF8F4">
+    {% if error_message %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+          title: 'Login Error',
+          text: '{{ error_message }}',
+          icon: '{{ alert_type }}'
+        });
+      });
+    </script>
+  {% endif %}
     <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
