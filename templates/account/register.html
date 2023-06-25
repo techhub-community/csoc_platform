@@ -103,63 +103,84 @@
               {% csrf_token %}
               <div class="row">
                   <div class="col-md-6">
-                      <div class="form-group first">
+                      <div class="form-group first {% if form.first_name.errors %}has-error{% endif %}">
                           <label for="fname">First Name</label>
                           <input type="text" class="form-control" placeholder="e.g. John" id="fname" name="first_name">
-                      </div>    
+                          {% if form.first_name.errors %}
+                              <span class="help-block text-primary" style="font-size: 0.8rem">{{ form.first_name.errors }}</span>
+                          {% endif %}
+                      </div>
                   </div>
                   <div class="col-md-6">
-                      <div class="form-group first">
+                      <div class="form-group first {% if form.last_name.errors %}has-error{% endif %}">
                           <label for="lname">Last Name</label>
                           <input type="text" class="form-control" placeholder="e.g. Smith" id="lname" name="last_name">
-                      </div>    
+                          {% if form.last_name.errors %}
+                              <span class="help-block text-primary" style="font-size: 0.8rem">{{ form.last_name.errors }}</span>
+                          {% endif %}
+                      </div>
                   </div>
               </div>
               <div class="row">
                   <div class="col-md-12">
-                      <div class="form-group first">
+                      <div class="form-group first {% if form.email.errors %}has-error{% endif %}">
                           <label for="email">Email Address</label>
                           <input type="email" class="form-control" placeholder="e.g. john@your-domain.com" id="email" name="email">
-                      </div>    
+                          {% if form.email.errors %}
+                              <span class="help-block text-primary" style="font-size: 0.8rem">{{ form.email.errors }}</span>
+                          {% endif %}
+                      </div>
                   </div>
               </div>
               <div class="row">
                   <div class="col-md-6">
-                      <div class="form-group first">
+                      <div class="form-group first {% if form.phone_number.errors %}has-error{% endif %}">
                           <label for="lname">Phone Number</label>
-                          <input type="text" class="form-control" placeholder="+91 0000 000 0000" id="lname" name="phone_number">
-                      </div>    
+                          <input type="text" class="form-control" placeholder="+91823111222" id="lname" name="phone_number">
+                          {% if form.phone_number.errors %}
+                              <span class="help-block text-primary" style="font-size: 0.8rem">{{ form.phone_number.errors }}</span>
+                          {% endif %}
+                      </div>
                   </div>
                   <div class="col-md-6">
-                      <div class="form-group first">
+                      <div class="form-group first {% if form.usn.errors %}has-error{% endif %}">
                           <label for="website">USN</label>
                           <input type="text" class="form-control" placeholder="1MV20CS000" id="fname" name="usn">
-                      </div>    
+                          {% if form.usn.errors %}
+                              <span class="help-block text-primary" style="font-size: 0.8rem">{{ form.usn.errors }}</span>
+                          {% endif %}
+                      </div>
                   </div>
               </div>
               <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group first">
-                        <label for="website">Program</label>
-                        <select class="form-control" id="website" name="program_selected">
-                            <option value="">None</option>
-                            {{ programs }}
-                            {% for program in programs %}
-                                <option value="{{ program.id }}">{{ program.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
+                  <div class="col-md-6">
+                      <div class="form-group first {% if form.program_selected.errors %}has-error{% endif %}">
+                          <label for="website">Program</label>
+                          <select class="form-control" id="website" name="program_selected">
+                              <option value="">None</option>
+                              {{ programs }}
+                              {% for program in programs %}
+                                  <option value="{{ program.id }}">{{ program.name }}</option>
+                              {% endfor %}
+                          </select>
+                          {% if form.program_selected.errors %}
+                              <span class="help-block text-primary" style="font-size: 0.8rem">{{ form.program_selected.errors }}</span>
+                          {% endif %}
+                      </div>
+                  </div>
               </div>
               <div class="row">
                   <div class="col-md-12">
-                      <div class="form-group first">
+                      <div class="form-group first {% if form.techstack.errors %}has-error{% endif %}">
                           <label for="email">Your Techstack</label>
                           <textarea class="form-control" placeholder="What all do you know" id="techstack" style="height: 6rem;" name="techstack"></textarea>
-                      </div>    
+                          {% if form.techstack.errors %}
+                              <span class="help-block text-primary" style="font-size: 0.8rem">{{ form.techstack.errors }}</span>
+                          {% endif %}
+                      </div>
                   </div>
               </div>
-              <label for="website">Proficiency :</label>
+              <label for="website">Proficiency:</label>
               <div class="form-check form-check-inline">
                   <input class="form-check-input" type="radio" name="proficiency" id="inlineRadio1" value="BEG">
                   <label class="form-check-label" for="inlineRadio1">Beginner</label>
@@ -180,15 +201,21 @@
               </div>
               <div class="row">
                   <div class="col-md-6">
-                      <div class="form-group last mb-3">
+                      <div class="form-group last mb-3 {% if form.password1.errors %}has-error{% endif %}">
                           <label for="password">Password</label>
                           <input type="password" name="password1" class="form-control" placeholder="Your Password" id="password">
+                          {% if form.password1.errors %}
+                              <span class="help-block text-primary" style="font-size: 0.8rem">{{ form.password1.errors }}</span>
+                          {% endif %}
                       </div>
                   </div>
                   <div class="col-md-6">
-                      <div class="form-group last mb-3">
+                      <div class="form-group last mb-3 {% if form.password2.errors %}has-error{% endif %}">
                           <label for="re-password">Re-type Password</label>
                           <input type="password" name="password2" class="form-control" placeholder="Your Password" id="re-password">
+                          {% if form.password2.errors %}
+                              <span class="help-block text-primary" style="font-size: 0.8rem">{{ form.password2.errors }}</span>
+                          {% endif %}
                       </div>
                   </div>
               </div>
@@ -196,6 +223,7 @@
               </div>
               <input type="submit" value="Register" class="btn px-5 btn-primary">
           </form>
+          
           </div>
         </div>
       </div>

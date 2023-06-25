@@ -36,7 +36,6 @@ class UserLoginView(IsUserAuthenticatedMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
-        print(form.errors)
         if form.is_valid():
             email = form.cleaned_data["email"]
             password = form.cleaned_data["password"]
@@ -49,6 +48,7 @@ class UserLoginView(IsUserAuthenticatedMixin, TemplateView):
                 form.add_error(None, "Your account is not been verified")
             else:
                 form.add_error(None, "Invalid login credentials")
+        print(form.errors)
         return render(request, self.template_name, {"form": form})
 
 
@@ -70,6 +70,7 @@ class UserRegisterView(IsUserAuthenticatedMixin, TemplateView):
             form.save()
             return redirect('index')
         context = self.get_context_data(**kwargs)
+        context['form'] = form
         return self.render_to_response(context)
 
 
