@@ -9,13 +9,15 @@ from .base import *
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
+DOMAIN = os.getenv('DOMAIN')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = ['64.227.148.114','django']
+ALLOWED_HOSTS = [DOMAIN, 'django']
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://64.227.148.114'
+    f'http://{DOMAIN}'
 ]
 
 # EMAIL SETTINGS
