@@ -162,7 +162,7 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
                 member3 = Member.objects.create(user=member3, team=team)
                 invite = Invite.objects.create(sender=member1, receiver=member3, Team=team)
                 invite.save()
-            return redirect('index')            
+            return redirect('index')
         context = self.get_context_data(**kwargs)
         return self.render_to_response(context)
 
