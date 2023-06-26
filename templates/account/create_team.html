@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
   <!-- Favicons -->
   <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
   <link href="{% static 'assets/img/favicon.png' %}" rel="apple-touch-icon">
@@ -37,7 +39,7 @@
     <!-- Style -->
 
     <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
     <title>Team</title>
   </head>
   <style>
@@ -46,6 +48,63 @@
     }
   </style>
   <body  style="background: #FEF8F4;">
+    {% if request.session.success_message %}
+    <script>
+      console.log("came inside");
+      document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+          title: '{{request.session.title}}',
+          text: '{{ request.session.success_message }}',
+          icon: '{{ request.session.alert_type }}',
+          confirmButtonColor:"#eb5d1e"
+        });
+        function getCookie(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+              }
+            }
+          }
+          return cookieValue;
+        }
+        
+        var csrftoken = getCookie('csrftoken');
+        $.ajax({
+          url: '/user/session/data/clear/',  // URL of the Django view
+          type: 'DELETE',  // HTTP method
+          headers: {
+            'X-CSRFToken': csrftoken  // Include the CSRF token in the request headers
+          },
+          success: function(response) {
+            // Handle the response from the server
+            console.log(response.message);
+          },
+          error: function(xhr, errmsg, err) {
+            // Handle any errors that occurred during the request
+            console.log('Error:', errmsg);
+          }
+        });
+      });
+    </script>
+  {% endif %}
+  {% if error_message %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+          title: '{{ title }}',
+          text: '{{ error_message }}',
+          icon: '{{ alert_type }}',
+          confirmButtonColor:"#eb5d1e"
+        });
+      });
+    </script>
+  {% endif %}
+
     <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
@@ -174,6 +233,8 @@ background-color: rgba(0, 0, 0, 0.5);"></div>
   <!-- Template Main JS File -->
   <script src="{%static 'assets/js/main.js' %}"></script>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
   </body>
 </html>
 

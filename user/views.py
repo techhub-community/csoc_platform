@@ -3,6 +3,7 @@ from typing import Any, Dict
 from loguru import logger
 
 from django import http
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.views import LogoutView
 from django.utils.decorators import method_decorator
@@ -45,14 +46,15 @@ class UserLoginView(IsUserAuthenticatedMixin, TemplateView):
             status = User.objects.filter(email=email)
             if user is not None:
                 login(request, user)
-                context={'title':"Login Successful",'success_message':"Login successfully.",'alert_type':'success'}
+                context = self.get_context_data(**kwargs)
+                context['title']='Login Successful'
+                context['success_message'] = 'Logged in successfully.'
+                context['alert_type'] = 'success'
                 return render(request,'landing/index.html',context)
-                # return redirect("index")
             elif status.values() and not status.values()[0]["is_active"]:
                 form.add_error(None, "Your account is not been verified")
             else:
                 form.add_error(None, "Invalid login credentials")
-        print(form.errors)
         return render(request, self.template_name, {"form": form})
 
 
@@ -69,15 +71,15 @@ class UserRegisterView(IsUserAuthenticatedMixin, TemplateView):
 
     def post(self, request, **kwargs):
         form = self.form_class(request.POST)
-        print(form.errors)
         if form.is_valid():
             form.save()
-            context={'title':"Sign Up Successful",'success_message':"An Verification Mail sent to your Email ID.",'alert_type':'success'}
+            context = self.get_context_data(**kwargs)
+            context['title']='Sign Up Successful'
+            context['success_message'] = 'An Verification Mail sent to your Email ID. It might take 2-3 hours to reach you.'
+            context['alert_type'] = 'success'
             return render(request,'landing/index.html',context)
         context = self.get_context_data(**kwargs)
         context['form'] = form
-        context['error_message'] = [f"Registration failed.\nerrors:{' '.join(form.errors)}"]
-        context['alert_type'] = 'error'
         return self.render_to_response(context)
 
 
@@ -128,18 +130,17 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
             members = Member.objects.filter(team=team)
             index = 2
             for member in members:
-                print(f'{index} {member.user}')
                 if member.user.id != current_user.id:
                     context[f'member{index}'] = member
                     index+=1
-        print(context)
         return context
 
     def post(self, request, **kwargs):
         form = self.form_class(request.POST, request=request)
+        context = self.get_context_data(**kwargs)
         user = request.user
-        print(form.errors)
         if form.is_valid():
+            created_flag = False
             member2 = form.cleaned_data.get('member2')
             member3 = form.cleaned_data.get('member3')
             try:
@@ -151,18 +152,28 @@ class UserCreateTeamView(LoginRequiredMixin, AllowTeamCreationMixin, TemplateVie
                 member1 = Member.objects.create(user=user, team=team, acceptance_status=True)
 
             if member2 and not Member.objects.filter(user=member2, acceptance_status=True):
+                created_flag = True
                 member2 = User.objects.get(id=member2)
                 member2 = Member.objects.create(user=member2, team=team)
-                invite = Invite.objects.create(sender=member1, receiver=member2, Team=team)
+                invite = Invite.objects.create(sender=member1, receiver=member2, team=team)
                 invite.save()
             
             if member3 and not Member.objects.filter(user=member3, acceptance_status=True):
+                created_flag = True
                 member3 = User.objects.get(id=member3)
                 member3 = Member.objects.create(user=member3, team=team)
-                invite = Invite.objects.create(sender=member1, receiver=member3, Team=team)
+                invite = Invite.objects.create(sender=member1, receiver=member3, team=team)
                 invite.save()
-            return redirect('index')
-        context = self.get_context_data(**kwargs)
+
+            if created_flag:
+                request.session['title'] = 'Invite Successful'
+                request.session['success_message'] = 'A Verification Mail sent to their Email ID. Team will be updated after their response.'
+                request.session['alert_type'] = 'success'
+            return redirect('user:create_team')
+        else:
+            context['title'] = 'Invite request failed'
+            context['error_message'] = ' '.join(form.non_field_errors())
+            context['alert_type'] = 'error'
         return self.render_to_response(context)
 
  
@@ -218,6 +229,18 @@ class EmailVerificationView(View):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist) as e:
             logger.info(f"{e} for token {token}")
         return None
+
+
+class ClearSessionDataView(View):
+    def delete(self, request, *args, **kwargs):
+        try:
+            del request.session['title']
+            del request.session['success_message']
+            del request.session['alert_type']
+        except Exception as e:
+            logger.info(f"Expection while deleting session data: {e}")
+            return JsonResponse({'message':e})
+        return JsonResponse({'message': 'Session data cleared successfully'})
 
 
 def submit_contact(request):
