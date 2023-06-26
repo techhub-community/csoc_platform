@@ -44,10 +44,14 @@ class CreateTeamForm(forms.Form):
             team = Member.objects.filter(user=user, acceptance_status=True).first().team
             if member2:
                 member2_check = Member.objects.filter(user__id=member2, team=team)
+                if member2_check:
+                    raise ValidationError("Request already sent before")
                 member2 = None if member2_check else member2
                 cleaned_data['member2'] = member2
             if member3:
                 member3_check = Member.objects.filter(user__id=member3, team=team)
+                if member3_check:
+                    raise ValidationError("Request already sent before")
                 member3 = None if member3_check else member3
                 cleaned_data['member3'] = member3
 
