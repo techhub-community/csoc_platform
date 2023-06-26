@@ -94,7 +94,8 @@ class UserProfileView(LoginRequiredMixin, TemplateView):
             context['team'] = team
             member_count = Member.objects.filter(team=team, acceptance_status=True).distinct().count()
             context['team_members'] = Member.objects.filter(team=team, acceptance_status=True) if team else []
-            context['pending_requests'] = Member.objects.filter(user=user, acceptance_status=False)
+            team_list = Member.objects.filter(user=user, acceptance_status=False).values_list('team', 'pk')
+            context['pending_requests'] = { Team.objects.get(pk=team[0]): {"members": Member.objects.filter(team_id=team, acceptance_status=True), "pk": team[1]} for team in team_list}
             context['domain']= settings.DOMAIN
         except:
             member_count = 0
