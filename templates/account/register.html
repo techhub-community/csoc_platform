@@ -46,6 +46,10 @@
       background-color: #FA761B;
       border-color: #FA761B;
     }
+    .custom-checkbox .form-check-input:focus,
+    .custom-checkbox .form-check-input:active {
+        box-shadow: 0 0 5px rgba(235, 93, 31, 0.5);
+    }
   </style>
   <body  style="background: #FEF8F4">
     {% if error_message %}
@@ -178,6 +182,16 @@
                               <span class="help-block text-primary" style="font-size: 0.8rem">{{ form.program_selected.errors }}</span>
                           {% endif %}
                       </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group first">
+                        <label for="email">Data Structure and Algorithm</label>
+                        <div class="checkbox px-4 py-1 mt-1">
+                            <label>
+                                <input type="checkbox" class="form-check-input custom-checkbox" style="border: 2px solid #EB5D1F;background-color: #EB5D1F;"  name="dsa" value="dsa" onclick="return false"  checked>&nbsp;<span class = "text-secondary" style="font-size: 0.9rem">Data Structure and Algorithm </span> 
+                            </label>
+                        </div>
+                    </div>
                   </div>
               </div>
               <div class="row">
