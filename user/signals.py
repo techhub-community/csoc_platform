@@ -46,7 +46,7 @@ def send_mail_func(sender, instance, created, **kwargs):
         image_url = f'https://{settings.DOMAIN}/static/assets/img/banner.png'
         invite_url = f'https://{settings.DOMAIN}/user/profile/'
         html_message = render_to_string('invite_email_template.html', {'sender_name': f'{instance.sender.user.first_name} {instance.sender.user.last_name}','user':instance.receiver.user.first_name, 'image_url':image_url, 'invite_url':invite_url})
-        send_mail(subject, '', 'codeshackcommunity@gmail.com', recipient_list, html_message=html_message)
+        send_mail(subject, '', settings.EMAIL_HOST_USER, recipient_list, html_message=html_message)
 
 
 def send_verification_email(user, created):
@@ -61,4 +61,4 @@ def send_verification_email(user, created):
         recipient_list = [user.email]
         print(verification_url)
         html_message = render_to_string('email_confirm_template.html', {'verification_url': verification_url})
-        send_mail(subject, '', 'codeshackcommunity@gmail.com', recipient_list, html_message=html_message)
+        send_mail(subject, '', settings.EMAIL_HOST_USER, recipient_list, html_message=html_message)

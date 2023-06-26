@@ -31,6 +31,7 @@ EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
 # EMAIL_USE_TLS=os.environ.get('EMAIL_USE_TLS')
 DEFAULT_FROM_EMAIL=os.environ.get('DEFAULT_FROM_EMAIL')
 EMAIL_USE_SSL=os.environ.get('EMAIL_USE_SSL')
+EMAIL_USE_TSL=os.getenv('EMAIL_USE_TSL')
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
