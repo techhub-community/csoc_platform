@@ -146,9 +146,9 @@
       <nav id="navbar2" class="navbar-container">
         
         <ul class="navbar2">
-           {% if allow_team_creation %}
+           {% comment %} {% if allow_team_creation %}
           <li><a class="nav-link scrollto" href="{% url 'user:create_team' %}" style="font-weight: bold; color: #eb5d1e;min-width: fit-content;">Create Team</a></li>
-          {% endif %}
+          {% endif %} {% endcomment %}
           {% if request.user.is_authenticated %}
           <li><a class="getstarted scrollto" href="{% url 'user:logout' %}" style="min-height: fit-content;">Logout</a></li>
           {% endif %} 
