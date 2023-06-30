@@ -238,7 +238,10 @@ class ClearSessionDataView(View):
     def delete(self, request, *args, **kwargs):
         try:
             del request.session['title']
-            del request.session['success_message']
+            if request.session['success_message']:
+                del request.session['success_message']
+            if request.session['error_message']:
+                del request.session['error_message']
             del request.session['alert_type']
         except Exception as e:
             logger.info(f"Expection while deleting session data: {e}")
@@ -285,8 +288,14 @@ class CustomPasswordChangeView(TemplateView):
             if password == confirm_password:
                 user.set_password(password)
                 user.save()
-                return redirect(self.success_url)
-        return self.render_to_response(self.get_context_data(form=form, validlink=False))
+                request.session['title'] = 'Password Changed Successful'
+                request.session['success_message'] = 'Your password has been changed successfully'
+                request.session['alert_type'] = 'success'
+                return redirect("user:login")
+        request.session['title'] = 'Failed'
+        request.session['error_message'] = 'Your password has not been changed, please try again'
+        request.session['alert_type'] = 'error'
+        return self.render_to_response(context=self.get_context_data(form=form, validlink=False))
 
     def get_user(self):
         uidb64 = self.kwargs['uidb64']
@@ -342,13 +351,12 @@ class ForgotPasswordView(FormView):
 
     def post(self, request, *args, **kwargs):
         response = super().post(self, request, *args, **kwargs)
-        context = self.get_context_data(**kwargs)
         if self.email_success:
-            context['title'] = 'Password Recovery Success'
-            context['success_message'] = 'Password recovery email has been sent on your email'
-            context['alert_type'] = 'success'
-            return render(request, 'account/login.html', context)
-        context['title'] = 'Password Recovery Failed'
-        context['success_message'] = 'There was some issue please try again'
-        context['alert_type'] = 'error'
-        return render(request, 'account/login.html', context)
+            request.session['title'] = 'Password Recovery Success'
+            request.session['success_message'] = 'Password recovery email has been sent on your email'
+            request.session['alert_type'] = 'success'
+            return redirect("user:login")
+        request.session['title'] = 'Password Recovery Failed'
+        request.session['error_message'] = 'There was some issue please try again'
+        request.session['alert_type'] = 'error'
+        return redirect("user:login")

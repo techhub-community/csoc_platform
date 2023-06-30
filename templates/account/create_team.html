@@ -92,7 +92,7 @@
       });
     </script>
   {% endif %}
-  {% if error_message %}
+  {% if request.session.error_message %}
     <script>
       document.addEventListener('DOMContentLoaded', function() {
         Swal.fire({
@@ -100,6 +100,37 @@
           text: '{{ error_message }}',
           icon: '{{ alert_type }}',
           confirmButtonColor:"#eb5d1e"
+        });
+        function getCookie(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+              }
+            }
+          }
+          return cookieValue;
+        }
+        
+        var csrftoken = getCookie('csrftoken');
+        $.ajax({
+          url: '/user/session/data/clear/',  // URL of the Django view
+          type: 'DELETE',  // HTTP method
+          headers: {
+            'X-CSRFToken': csrftoken  // Include the CSRF token in the request headers
+          },
+          success: function(response) {
+            // Handle the response from the server
+            console.log(response.message);
+          },
+          error: function(xhr, errmsg, err) {
+            // Handle any errors that occurred during the request
+            console.log('Error:', errmsg);
+          }
         });
       });
     </script>
