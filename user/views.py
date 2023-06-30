@@ -238,11 +238,11 @@ class ClearSessionDataView(View):
     def delete(self, request, *args, **kwargs):
         try:
             del request.session['title']
+            del request.session['alert_type']
             if request.session['success_message']:
                 del request.session['success_message']
             if request.session['error_message']:
                 del request.session['error_message']
-            del request.session['alert_type']
         except Exception as e:
             message = f"Expection while deleting session data: {e}"
             logger.info(message)
