@@ -285,6 +285,7 @@ class CustomPasswordChangeView(TemplateView):
             if password == confirm_password:
                 user.set_password(password)
                 user.save()
+                context = self.get_context_data()
                 context['title'] = 'Password Changed Successful'
                 context['success_message'] = 'Your password has been changed successfully'
                 context['alert_type'] = 'success'
