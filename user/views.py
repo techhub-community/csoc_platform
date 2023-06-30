@@ -328,6 +328,10 @@ class ForgotPasswordView(FormView):
             reset_url = self.request.build_absolute_uri(
                 reverse_lazy("user:password_reset_confirm", kwargs={"uidb64": user.pk, "token": token})
             )
+            pattern = r"http://django"
+            replacement_protocol = "https://"
+            replacement_domain = "csoc.codeshack.codes"
+            reset_url = re.sub(pattern, replacement_protocol + replacement_domain, url)
             email_thread = threading.Thread(
                 target=send_forgot_password_mail,
                 kwargs=({'reset_url': reset_url, 'user': user})
