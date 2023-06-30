@@ -2,6 +2,9 @@ import threading
 from typing import Any, Dict
 from loguru import logger
 
+from django.conf import settings
+from django.core.mail import send_mail
+from django.http import HttpResponse
 from django import http
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
@@ -18,12 +21,10 @@ from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth.views import PasswordResetView, PasswordChangeView
 from django.views.generic import FormView
 
-from .forms import CustomUserCreationForm, LoginForm, CreateTeamForm
+from .forms import CustomUserCreationForm, LoginForm, CreateTeamForm, ResetPasswordForm, ForgotPasswordForm
 from .models import Member, User, Program, Team, Invite, Inquiry
 from csoc_backend.views import AllowTeamCreationMixin
-from django.conf import settings
-from django.core.mail import send_mail
-from django.http import HttpResponse
+from .signals import send_forgot_password_mail
 
 
 class IsUserAuthenticatedMixin:
@@ -257,3 +258,93 @@ def submit_contact(request):
 
     # Render the form template if not a POST request or form submission fails
     return HttpResponse('OK',status=200)
+
+
+class CustomPasswordChangeView(TemplateView):
+    template_name = "account/change_password.html"
+    success_url = reverse_lazy("user:login")
+    form_class = ResetPasswordForm
+
+    def dispatch(self, request, *args, **kwargs):
+        self.reset_user = self.get_user()
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        user = self.reset_user
+        if user is not None:
+            print(self.form_class())
+            return render(request, self.template_name, {'form': self.form_class()})
+        return render(request, template_name="account/login.html")
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            user = self.reset_user
+            password = form.cleaned_data.get("password")
+            confirm_password = form.cleaned_data.get("confirm_password")
+            if password == confirm_password:
+                user.set_password(password)
+                user.save()
+                return redirect(self.success_url)
+        return self.render_to_response(self.get_context_data(form=form, validlink=False))
+
+    def get_user(self):
+        uidb64 = self.kwargs['uidb64']
+        token = self.kwargs['token']
+        try:
+            uid = uidb64
+            user = User.objects.get(pk=uid)
+            if default_token_generator.check_token(user, token):
+                return user
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+            pass
+        return None
+
+    def form_valid(self, form):
+        user = self.reset_user
+        if user is not None:
+            user.set_password(form.cleaned_data['new_password1'])
+            user.save()
+            return super().form_valid(form)
+        return self.render_to_response(self.get_context_data(form=form, validlink=False))
+
+
+class ForgotPasswordView(FormView):
+    template_name = "account/forgot_password.html"
+    form_class = ForgotPasswordForm
+    success_url = reverse_lazy("user:login")
+
+    def dispatch(self, request, *args, **kwargs):
+        self.email_success = False
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        email = form.cleaned_data["email"]
+        users = User.objects.filter(email=email)
+        user = users.first()
+
+        if user:
+            token = default_token_generator.make_token(user)
+            reset_url = self.request.build_absolute_uri(
+                reverse_lazy("user:password_reset_confirm", kwargs={"uidb64": user.pk, "token": token})
+            )
+            email_thread = threading.Thread(
+                target=send_forgot_password_mail,
+                kwargs=({'reset_url': reset_url, 'user': user})
+            )
+            email_thread.start()
+            self.email_success = True
+        return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(self, request, *args, **kwargs)
+        context = self.get_context_data(**kwargs)
+        if self.email_success:
+            context['title'] = 'Password Recovery Success'
+            context['success_message'] = 'Password recovery email has been sent on your email'
+            context['alert_type'] = 'success'
+            return render(request, 'account/login.html', context)
+        context['title'] = 'Password Recovery Failed'
+        context['success_message'] = 'There was some issue please try again'
+        context['alert_type'] = 'error'
+        return render(request, 'account/login.html', context)

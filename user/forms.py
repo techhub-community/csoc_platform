@@ -59,3 +59,30 @@ class CreateTeamForm(forms.Form):
             raise ValidationError("Member 2 and Member 3 cannot be the same.")
 
         return cleaned_data
+
+
+class ResetPasswordForm(forms.Form):
+    password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Password",
+                "class": "form-control"
+            }
+        ))
+    confirm_password = forms.CharField(
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "Confirm Password",
+                "class": "form-control"
+            }
+        ))
+
+
+class ForgotPasswordForm(forms.Form):
+    email = forms.EmailField(
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Email",
+                "class": "form-control"
+            }
+        ))

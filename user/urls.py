@@ -9,7 +9,9 @@ from .views import (
     AcceptInviteView,
     RejectInviteView,
     EmailVerificationView,
-    ClearSessionDataView
+    ClearSessionDataView,
+    ForgotPasswordView,
+    CustomPasswordChangeView
     )
 
 app_name = 'user'
@@ -23,5 +25,7 @@ urlpatterns = [
     path('invite/accept/<int:pk>/', AcceptInviteView.as_view(), name='invite_accept'),
     path('invite/decline/<int:pk>/', RejectInviteView.as_view(), name='invite_decline'),
     path('verify-email/<str:token>/', EmailVerificationView.as_view(), name='email_verification'),
-    path('session/data/clear/', ClearSessionDataView.as_view(), name='clear_session_data')
+    path('session/data/clear/', ClearSessionDataView.as_view(), name='clear_session_data'),
+    path('forgot-password/', ForgotPasswordView.as_view(), name='forgot_password'),
+    path('reset/<int:uidb64>/<token>/', CustomPasswordChangeView.as_view(), name='password_reset_confirm')
 ]

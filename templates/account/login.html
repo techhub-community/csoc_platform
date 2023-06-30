@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'assets/fonts/icomoon/style.css' %}">
 
     <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
 
   <!-- Favicons -->
   <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
@@ -46,6 +47,18 @@
     }
   </style>
   <body  style="background: #FEF8F4">
+  {% if success_message %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        Swal.fire({
+          title: '{{title}}',
+          text: '{{ success_message }}',
+          icon: '{{ alert_type }}',
+          confirmButtonColor:"#eb5d1e"
+        });
+      });
+    </script>
+  {% endif %}
     <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
@@ -126,7 +139,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex mb-2 mt-4 align-items-center">
+                <div class="row">
+                <div class="col-md-12">
+                  <div class="">
+                    <label for="password"><a href="{% url 'user:forgot_password' %}">Forgot Password</a></label>
+                  </div>
+                </div>
+              </div>
+                <div class="d-flex mb-2 align-items-center">
                 </div>
                 <input type="submit" value="Login" class="btn px-5 btn-primary">
             </form>            
@@ -150,6 +170,7 @@
 
   <!-- Template Main JS File -->
   <script src="{%static 'assets/js/main.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
   </div>
   </body>
 </html>

@@ -62,3 +62,19 @@ def send_verification_email(user, created):
         print(verification_url)
         html_message = render_to_string('email_confirm_template.html', {'verification_url': verification_url})
         send_mail(subject, '', settings.EMAIL_HOST_USER, recipient_list, html_message=html_message)
+
+
+def send_forgot_password_mail(reset_url, user):
+    logger.info(f"sending forgot password to {user}")
+    subject = 'Forgot Password'
+    recipient_list = [user.email]
+    image_url = f'https://{settings.DOMAIN}/static/assets/img/banner.png'
+    html_message = render_to_string(
+        'email_forgot_password_template.html', 
+        {
+            'user': f'{user.first_name} {user.last_name}',
+            'image_url': image_url, 
+            'reset_password_url': reset_url
+        })
+    send_mail(subject, '', settings.EMAIL_HOST_USER, recipient_list, html_message=html_message)    
+    pass
