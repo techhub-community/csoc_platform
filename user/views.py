@@ -237,11 +237,13 @@ class EmailVerificationView(View):
 class ClearSessionDataView(View):
     def delete(self, request, *args, **kwargs):
         try:
-            del request.session['title']
-            del request.session['alert_type']
-            if request.session['success_message']:
+            if request.session.get('title'):
+                del request.session['title']
+            if request.session.get('alert_type'):
+                del request.session['alert_type']
+            if request.session.get('success_message'):
                 del request.session['success_message']
-            if request.session['error_message']:
+            if request.session.get('error_message'):
                 del request.session['error_message']
         except Exception as e:
             message = f"Expection while deleting session data: {e}"
