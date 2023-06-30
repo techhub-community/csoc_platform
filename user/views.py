@@ -332,7 +332,7 @@ class ForgotPasswordView(FormView):
             pattern = r"http://django"
             replacement_protocol = "https://"
             replacement_domain = "csoc.codeshack.codes"
-            reset_url = re.sub(pattern, replacement_protocol + replacement_domain, url)
+            reset_url = re.sub(pattern, replacement_protocol + replacement_domain, reset_url)
             email_thread = threading.Thread(
                 target=send_forgot_password_mail,
                 kwargs=({'reset_url': reset_url, 'user': user})
