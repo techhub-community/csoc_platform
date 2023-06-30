@@ -286,7 +286,7 @@ class CustomPasswordChangeView(TemplateView):
             user = self.reset_user
             password = form.cleaned_data.get("password")
             confirm_password = form.cleaned_data.get("confirm_password")
-            if password == confirm_password:
+            if password == confirm_password and user:
                 user.set_password(password)
                 user.save()
                 request.session['title'] = 'Password Changed Successful'
