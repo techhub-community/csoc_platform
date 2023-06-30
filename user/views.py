@@ -244,8 +244,9 @@ class ClearSessionDataView(View):
                 del request.session['error_message']
             del request.session['alert_type']
         except Exception as e:
-            logger.info(f"Expection while deleting session data: {e}")
-            return JsonResponse({'message':e})
+            message = f"Expection while deleting session data: {e}"
+            logger.info(message)
+            return JsonResponse({'message':message})
         return JsonResponse({'message': 'Session data cleared successfully'})
 
 
