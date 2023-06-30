@@ -273,7 +273,6 @@ class CustomPasswordChangeView(TemplateView):
     def get(self, request, *args, **kwargs):
         user = self.reset_user
         if user is not None:
-            print(self.form_class())
             return render(request, self.template_name, {'form': self.form_class()})
         return render(request, template_name="account/login.html")
 
@@ -286,8 +285,15 @@ class CustomPasswordChangeView(TemplateView):
             if password == confirm_password:
                 user.set_password(password)
                 user.save()
-                return redirect(self.success_url)
-        return self.render_to_response(self.get_context_data(form=form, validlink=False))
+                context['title'] = 'Password Changed Successful'
+                context['success_message'] = 'Your password has been changed successfully'
+                context['alert_type'] = 'success'
+                return render(request, 'account/login.html', context)
+        context = self.get_context_data(form=form, validlink=False)
+        context['title'] = 'Failed'
+        context['error_message'] = 'Your password has not been changed, please try again'
+        context['alert_type'] = 'error'
+        return self.render_to_response(context=context)
 
     def get_user(self):
         uidb64 = self.kwargs['uidb64']
@@ -350,6 +356,6 @@ class ForgotPasswordView(FormView):
             context['alert_type'] = 'success'
             return render(request, 'account/login.html', context)
         context['title'] = 'Password Recovery Failed'
-        context['success_message'] = 'There was some issue please try again'
+        context['error_message'] = 'There was some issue please try again'
         context['alert_type'] = 'error'
         return render(request, 'account/login.html', context)
