@@ -19,7 +19,7 @@ class Problem(models.Model):
     question_name = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.question_name
+        return f"{self.question_name} {self.topic}"
 
     class Meta:
         verbose_name = 'Problem'
