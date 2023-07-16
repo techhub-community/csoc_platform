@@ -55,3 +55,4 @@ class Problem_Status(models.Model):
     class Meta:
         verbose_name = 'Problem Status'
         verbose_name_plural = 'Problem Statuses'
+

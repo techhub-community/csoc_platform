@@ -22,3 +22,12 @@ urlpatterns += [
         ]),
     ),
 ]
+
+urlpatterns += [
+    # API base url
+    path('api/v1/', include([
+        # users API
+        path('contest/', include('contest.urls')),
+        ]),
+    ),
+]

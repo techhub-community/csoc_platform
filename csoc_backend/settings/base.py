@@ -17,7 +17,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user',
-    'dsa'
+    'dsa',
+    'contest'
 ]
 
 MIDDLEWARE = [
@@ -31,6 +32,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'csoc_backend.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ]
+}
 
 TEMPLATES = [
     {
