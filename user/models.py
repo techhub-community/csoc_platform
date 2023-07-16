@@ -38,7 +38,6 @@ class User(AbstractUser):
     objects = CustomUserManager()
 
 
-
 class Team(models.Model):
     name = models.CharField(_(""), max_length=50)
 

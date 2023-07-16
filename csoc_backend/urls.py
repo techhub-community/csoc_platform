@@ -12,3 +12,13 @@ urlpatterns = [
     path('submit-contact/', views.submit_contact, name='submit_contact'),
     path('user/', include('user.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+urlpatterns += [
+    # API base url
+    path('api/v1/', include([
+        # users API
+        path('dsa/', include('dsa.urls')),
+        ]),
+    ),
+]
