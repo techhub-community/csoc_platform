@@ -19,6 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'dsa',
+    'task',
     'rest_framework',
     'rest_framework_simplejwt',
 ]
