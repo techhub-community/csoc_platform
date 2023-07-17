@@ -9,3 +9,4 @@ phonenumbers==8.13.14
 python-dotenv==1.0.0
 loguru
 djangorestframework
+djangorestframework-simplejwt
