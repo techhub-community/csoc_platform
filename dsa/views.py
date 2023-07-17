@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 from rest_framework.response import Response
 
 from .models import Topic, Problem, Status, Problem_Status
@@ -8,10 +8,14 @@ from .serializers import TopicSerializer, ProblemSerializer, StatusSerializer, P
 class TopicListCreateAPIView(generics.ListCreateAPIView):
     queryset = Topic.objects.all()
     serializer_class = TopicSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
-    # def list(self, request, *args, **kwargs):
-    #     return Response(status=200, 
-    #                     data=[{'something': 'utkarsh my custom JSON',},],)
+    def get_permission_classes(self):
+        if self.request.method == 'POST':
+            return [permissions.IsAdminUser]
+        return super().get_permission_classes()
+
+    
 
 class ProblemListCreateAPIView(generics.ListCreateAPIView):
     queryset = Problem.objects.all()
