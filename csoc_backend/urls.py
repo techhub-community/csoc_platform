@@ -20,7 +20,7 @@ urlpatterns += [
         # users API
         path('dsa/', include('dsa.urls')),
         path('user/', include('user.apis.urls')),
-        path('user-task/', include('task.urls'))
+        path('task/', include('task.urls'))
         ]),
     ),
 ]
