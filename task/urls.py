@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import TaskListCreateAPIView, TaskStatusListCreateAPIView
 
-app_name = 'dsa'
+app_name = 'task'
 
 
 urlpatterns = [
