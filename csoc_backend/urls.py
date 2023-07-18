@@ -19,14 +19,6 @@ urlpatterns += [
     path('api/v1/', include([
         # users API
         path('dsa/', include('dsa.urls')),
-        ]),
-    ),
-]
-
-urlpatterns += [
-    # API base url
-    path('api/v1/', include([
-        # users API
         path('contest/', include('contest.urls')),
         ]),
     ),
