@@ -26,31 +26,15 @@ class Problem(models.Model):
         verbose_name_plural = 'Problems'
 
 
-class Status(models.Model):
+class Problem_Status(models.Model):
     class Choices(models.TextChoices):
         PENDING = 'PEN', _('PENDING')
         SUBMITTED = 'SUB', _('SUBMITTED')
-        VERIFIED = 'VER', _('VERIFIED')
+        VERIFIED = 'VER', _('VERIFIED')        
 
-
-    choices = models.CharField(
-        max_length=3,
-        choices=Choices.choices,
-        default=Choices.PENDING,
-    )
-
-    def __str__(self):
-        return self.choices
-
-    class Meta:
-        verbose_name = 'Status'
-        verbose_name_plural = 'Statuses'
-
-
-class Problem_Status(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.ForeignKey(Problem, on_delete=models.CASCADE)
-    status = models.ForeignKey(Status, on_delete=models.CASCADE)
+    status = models.CharField(max_length=3, choices=Choices.choices, default=Choices.PENDING)
 
     class Meta:
         verbose_name = 'Problem Status'
