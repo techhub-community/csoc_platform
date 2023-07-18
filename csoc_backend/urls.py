@@ -19,6 +19,7 @@ urlpatterns += [
     path('api/v1/', include([
         # users API
         path('dsa/', include('dsa.urls')),
+        path('user/', include('user.apis.urls')),
         ]),
     ),
 ]

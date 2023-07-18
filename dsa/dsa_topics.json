@@ -1,0 +1,20 @@
+[
+    {
+        "model": "dsa.Topic",
+        "fields": {
+            "topic_name": "Recursion"
+        }
+    },
+    {
+        "model": "dsa.Topic",
+        "fields": {
+            "topic_name": "Dynamic Programming"
+        }
+    },
+    {
+        "model": "dsa.Topic",
+        "fields": {
+            "topic_name": "Graphs"
+        }
+    }
+]
