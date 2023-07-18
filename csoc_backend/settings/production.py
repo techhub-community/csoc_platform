@@ -58,8 +58,6 @@ DATABASES = {
     }
 }
 
-SIMPLE_JWT["SIGNING_KEY"] = SECRET_KEY
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 

@@ -92,6 +92,7 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': False,
     'ALGORITHM': 'HS256',  # Change to RS256 if using RSA
     'VERIFYING_KEY': None,
+    'SIGNING_KEY': 'c_r-e8v1divj8y+hu@-w=n#$xj#ciuejybd3_(k2h789(mcv8$',
     'AUTH_HEADER_TYPES': ('Bearer',),
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
