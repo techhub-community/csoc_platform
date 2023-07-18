@@ -92,7 +92,6 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_REVOKE_ON_TOKEN_REFRESH': False,
     'ROTATE_REFRESH_TOKENS': False,
     'ALGORITHM': 'HS256',  # Change to RS256 if using RSA
-    'SIGNING_KEY': os.getenv('SECRET_KEY'),
     'VERIFYING_KEY': None,
     'AUTH_HEADER_TYPES': ('Bearer',),
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
