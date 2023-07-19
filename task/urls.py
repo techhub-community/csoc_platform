@@ -1,11 +1,9 @@
 from django.urls import path
 
-from .views import TaskListCreateAPIView, TaskStatusListCreateAPIView
+from .views import TaskListCreateAPIView
 
 app_name = 'task'
 
-
 urlpatterns = [
-    path('<int:pk>/', TaskListCreateAPIView.as_view(), name='topic-list-create'),
-    path('status/', TaskStatusListCreateAPIView.as_view(), name='problem-list-create'),
+    path('', TaskListCreateAPIView.as_view(), name='topic-list-create')
 ]

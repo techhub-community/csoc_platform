@@ -1,18 +1,27 @@
-from rest_framework import generics, permissions
-from rest_framework.response import Response
+from rest_framework import generics
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from .models import Task, TaskStatus
-from .serializers import TaskSerializer, TaskStatusSerializer
+from .models import Task
+from .serializers import TaskSerializer
+from user.models import Member
+from user.apis.permissions import CustomPermissionMixin
 
-#1. Separate the list and createVIew for task 
-#2. The List View should only send the list of tasks that are associated with the particular team those pk which has been passed in the URL
-#3. 
-class TaskListCreateAPIView(generics.ListCreateAPIView):
+
+class TaskListCreateAPIView(CustomPermissionMixin, generics.ListCreateAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
+    authentication_classes = [JWTAuthentication]
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user = self.request.user
+        if user.is_superuser:
+            return queryset
+        try:
+            team = Member.objects.get(user=user.id, acceptance_status=True).team
+        except:
+            return queryset.none()   
+        return queryset.filter(team=team)
 
-#Use ListAPIView/RetrieveAPIView to fetch the data for a task associated with a particular user
+
 #Task Status cannot be created. It can only be updated. 
-class TaskStatusListCreateAPIView(generics.ListCreateAPIView):
-    queryset = TaskStatus.objects.all()
-    serializer_class = TaskStatusSerializer

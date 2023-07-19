@@ -6,9 +6,7 @@ from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.conf import settings
-from django.core.mail import EmailMessage
 from django.contrib.auth.tokens import default_token_generator
-from django.contrib.auth import get_user_model
 
 from .models import Member, Invite, User
 
@@ -23,9 +21,8 @@ def delete_duplicate_members(sender, instance, **kwargs):
 @receiver(post_save, sender=Invite)
 def send_invite_email(sender, instance, created, **kwargs):
     try:
-        print("Creating User...")
-        # email_thread = threading.Thread(target=send_mail_func,kwargs=({'sender': sender, 'instance': instance, 'created': created}))
-        # email_thread.start()
+        email_thread = threading.Thread(target=send_mail_func,kwargs=({'sender': sender, 'instance': instance, 'created': created}))
+        email_thread.start()
     except Exception as e:
         logger.info(f"Failed to send mail to {instance.receiver}, sent by {sender}")
 
@@ -33,9 +30,8 @@ def send_invite_email(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def send_confirm_email(sender, instance, created, **kwargs):
     try:
-        print("Team Verification....")
-        # email_thread = threading.Thread(target=send_verification_email,kwargs=({'user': instance, 'created': created}))
-        # email_thread.start()
+        email_thread = threading.Thread(target=send_verification_email,kwargs=({'user': instance, 'created': created}))
+        email_thread.start()
     except Exception as e:
         logger.info(f"Failed to send verification mail to {instance}")
 
