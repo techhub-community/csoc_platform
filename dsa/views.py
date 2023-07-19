@@ -1,16 +1,10 @@
-from rest_framework import generics, permissions
+from rest_framework import generics
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.response import Response
 
 from .models import Topic, Problem, Problem_Status
 from .serializers import TopicSerializer, ProblemSerializer, ProblemStatusSerializer
-
-
-class CustomPermissionMixin:
-    def get_permissions(self):
-        if self.request.method == 'GET':
-            return [permissions.IsAuthenticated()]
-        return [permissions.IsAdminUser()]
+from user.apis.permissions import CustomPermissionMixin
 
 
 class TopicListCreateAPIView(CustomPermissionMixin, generics.ListCreateAPIView):
