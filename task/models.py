@@ -1,6 +1,8 @@
 from django.db import models
-from user.models import Member, Team
 from django.utils.translation import gettext as _
+
+from user.models import Member, Team
+
 
 
 class TaskStatus(models.Model):
@@ -29,10 +31,11 @@ class Task(models.Model):
     def __str__(self):
         return f"{self.task_name}"
     
-    @property
-    def get_task_status(self):
+    def get_task_status(self, user):
         try:
-            return TaskStatus.objects.get(task=self).status
+            member = Member.objects.get(user=user, acceptance_status=True)
+            status = TaskStatus.objects.get(task=self, member=member).status
+            return status
         except:
             return TaskStatus.Choices.PENDING
 
