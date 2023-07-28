@@ -1,8 +1,8 @@
 from django.urls import path
 
-from .views import ResourceListCreateAPIView
+from .views import ResourceListAPIView
 
 
 urlpatterns = [
-    path('', ResourceListCreateAPIView.as_view(), name='resource_list_create'),
+    path('', ResourceListAPIView.as_view(), name='resource_list'),
 ]

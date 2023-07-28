@@ -1,31 +1,34 @@
-from rest_framework.generics import ListCreateAPIView
+import pandas as pd
+
+from rest_framework.generics import ListAPIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.response import Response
-from itertools import groupby
 
 from .models import Resource
 from .serializers import ResourceSerializer
 from user.apis.permissions import CustomPermissionMixin
 
 
-class ResourceListCreateAPIView(CustomPermissionMixin, ListCreateAPIView):
+class ResourceListAPIView(CustomPermissionMixin, ListAPIView):
+    queryset = Resource.objects.all()
     serializer_class = ResourceSerializer
     authentication_classes = [JWTAuthentication]
 
-    def get_queryset(self):
-        return Resource.objects.all()
+    def generate_grouped_resources(self):
+        resources = Resource.objects.all().values_list('program__name', 'topic', 'description', 'link')
+        df = pd.DataFrame.from_records(resources, columns=['program__name', 'topic', 'description', 'link'])
+        grouped_df = df.groupby(['program__name', 'topic'])
+        return [
+            (program_name, topic, [{"description": row.description, "link": row.link} for row in group.itertuples(index=False)])
+            for (program_name, topic), group in grouped_df
+        ]
 
-    def list(self, request, *args, **kwargs):
-        resources = self.get_queryset()
-        grouped_resources = {}
-        resources = sorted(resources, key=lambda x: (x.domain, x.topic))
-        for (domain, topic), group in groupby(resources, key=lambda x: (x.domain, x.topic)):
-            if domain not in grouped_resources:
-                grouped_resources[domain] = []
-            topic_resources = [
-                {"name": resource.name, "link": resource.link} for resource in group
+    def get(self, request, *args, **kwargs):
+        grouped_resources = {
+            program_name: [
+                {"topic": topic, "resources": resources_list}
+                for program_name, topic, resources_list in self.generate_grouped_resources()
             ]
-            grouped_resources[domain].append(
-                {"topic": topic, "resources": topic_resources})
-
+            for program_name, topic, resources_list in self.generate_grouped_resources()
+        }
         return Response(grouped_resources)

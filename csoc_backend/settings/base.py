@@ -87,7 +87,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # token settings
 SIMPLE_JWT = {
     # Adjust token lifetime as needed
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1000),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
     'SLIDING_TOKEN_REFRESH_LIFETIME_GRACE_PERIOD': timedelta(days=1),
     'SLIDING_TOKEN_REFRESH_REVOKE_ON_PASSWORD_CHANGE': True,
