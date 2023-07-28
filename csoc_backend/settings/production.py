@@ -58,6 +58,8 @@ DATABASES = {
     }
 }
 
+MIDDLEWARE.append('csoc_backend.logging.middleware.RequestIPMiddleware')
+
 SIMPLE_JWT["SIGNING_KEY"] = SECRET_KEY
 
 # Static files (CSS, JavaScript, Images)
