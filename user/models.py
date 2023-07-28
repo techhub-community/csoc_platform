@@ -37,6 +37,16 @@ class User(AbstractUser):
         return f"{self.first_name} {self.last_name} ({self.email})"
     objects = CustomUserManager()
 
+    def get_team_member_ids(self):
+        try:
+            member = self.member_set.first()
+            if member:
+                team = member.team
+                return list(self.member_set.filter(team=team).values_list('id', flat=True))
+        except Member.DoesNotExist:
+            pass
+        return []
+
 
 class Team(models.Model):
     name = models.CharField(_(""), max_length=50)
