@@ -1,22 +1,19 @@
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import BasePermission, IsAuthenticated
 
 from user.models import User
-from user.apis.serializers import UserSerializer
-from user.apis.permissions import CustomPermissionMixin
+from user.apis.serializers import UserRetrieveSerializer
 
 
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def protected_view(request):
-    user = request.user
-    return Response({'message': f'Hello, {user.username}! This is a protected view.'})
+class IsOwner(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return obj == request.user
 
 
-class UserListCreateView(CustomPermissionMixin, generics.ListCreateAPIView):
+class UserRetrieveView( generics.RetrieveAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
+    serializer_class = UserRetrieveSerializer
     authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated, IsOwner]
+    lookup_field = 'id'

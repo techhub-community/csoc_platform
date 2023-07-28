@@ -1,15 +1,19 @@
 from rest_framework import serializers
 
-from user.models import User
+from user.models import *
 
 
-class UserSerializer(serializers.ModelSerializer):
-    team_members = serializers.SerializerMethodField()
+class MemberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Member  
+        fields = ['id', 'user', 'team']  
 
-    def get_team_members(self, obj):
-        return obj.get_team_member_ids()
+
+class UserRetrieveSerializer(serializers.ModelSerializer):
+    team_members = MemberSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
-        fields = fields = ['id', 'email', 'usn', 'phone_number',
-                           'techstack', 'proficiency', 'first_name', 'last_name', 'team_members']
+        fields = ['id', 'email', 'usn', 'phone_number',
+                  'techstack', 'proficiency', 'first_name', 'last_name', 'team_members']
+
