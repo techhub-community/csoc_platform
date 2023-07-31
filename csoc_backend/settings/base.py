@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'task',
     'rest_framework',
     'rest_framework_simplejwt',
+    'learning_resources',
 ]
 
 MIDDLEWARE = [
@@ -85,7 +86,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # token settings
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),  # Adjust token lifetime as needed
+    # Adjust token lifetime as needed
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=1000),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
     'SLIDING_TOKEN_REFRESH_LIFETIME_GRACE_PERIOD': timedelta(days=1),
     'SLIDING_TOKEN_REFRESH_REVOKE_ON_PASSWORD_CHANGE': True,
@@ -97,7 +99,6 @@ SIMPLE_JWT = {
     'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
     'TOKEN_TYPE_CLAIM': 'token_type',
 }
-
 
 
 # Internationalization
