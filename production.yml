@@ -3,6 +3,7 @@ version: '3.8'
 volumes:
   csoc_postgres_data: {}
   static:
+  gunicorn_socket:
 
 services:
   postgres:
@@ -24,6 +25,7 @@ services:
       - .:/app:z
       - ./static:/app/static
       - ./logs:/app/logs
+      - gunicorn_socket:/app
     env_file:
       - .env
     build:
@@ -41,9 +43,9 @@ services:
       - ./static:/app/static
       - /etc/letsencrypt/live/csoc.codeshack.codes/fullchain.pem:/etc/nginx/certs/fullchain.pem:ro
       - /etc/letsencrypt/live/csoc.codeshack.codes/privkey.pem:/etc/nginx/certs/privkey.pem:ro
+      - gunicorn_socket:/app
     ports:
       - "80:80"
       - "443:443"
     depends_on:
       - django_gunicorn
-
