@@ -1,8 +1,7 @@
-import pandas as pd
-
 from rest_framework.generics import ListAPIView
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.response import Response
+from collections import defaultdict
 
 from .models import Resource
 from .serializers import ResourceSerializer
@@ -14,21 +13,26 @@ class ResourceListAPIView(CustomPermissionMixin, ListAPIView):
     serializer_class = ResourceSerializer
     authentication_classes = [JWTAuthentication]
 
+
+    def get_resource_data(self, resource_data):
+        return {
+            "description": resource_data['description'],
+            "link": resource_data['link'],
+        }
+
     def generate_grouped_resources(self):
-        resources = Resource.objects.all().values_list('program__name', 'topic', 'description', 'link')
-        df = pd.DataFrame.from_records(resources, columns=['program__name', 'topic', 'description', 'link'])
-        grouped_df = df.groupby(['program__name', 'topic'])
-        return [
-            (program_name, topic, [{"description": row.description, "link": row.link} for row in group.itertuples(index=False)])
-            for (program_name, topic), group in grouped_df
+        resources = Resource.objects.values('program__name', 'topic', 'description', 'link')
+        grouped_resources = defaultdict(lambda: defaultdict(list))
+        [
+            grouped_resources[resource_data['program__name']][resource_data['topic']].append(self.get_resource_data(resource_data))
+            for resource_data in resources
         ]
+        return grouped_resources
 
     def get(self, request, *args, **kwargs):
-        grouped_resources = {
-            program_name: [
-                {"topic": topic, "resources": resources_list}
-                for program_name, topic, resources_list in self.generate_grouped_resources()
-            ]
-            for program_name, topic, resources_list in self.generate_grouped_resources()
+        grouped_resources = self.generate_grouped_resources()
+        response_data = {
+            program_name: [{"topic": topic, "resources": resources_list} for topic, resources_list in topics.items()]
+            for program_name, topics in grouped_resources.items()
         }
-        return Response(grouped_resources)
+        return Response(response_data)
