@@ -4,16 +4,16 @@ volumes:
   csoc_postgres_data: {}
   static:
   gunicorn_socket:
-    driver: local
 
 services:
   postgres:
     image: postgres
     container_name: csoc_postgres
     ports:
-      - 5432:5432
+      - localhost:5432:5432
     volumes:
       - csoc_postgres_data:/var/lib/postgresql/data
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
     env_file:
       - .env
 
@@ -26,15 +26,13 @@ services:
       - .:/app:z
       - ./static:/app/static
       - ./logs:/app/logs
-      - gunicorn_socket:/gunicorn_socket
+      - gunicorn_socket:/app
     env_file:
       - .env
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
     container_name: csoc_django_gunicorn
-    ports:
-      - "8000:8000"
     depends_on:
       - postgres
 
