@@ -4,6 +4,7 @@ volumes:
   csoc_postgres_data: {}
   static:
   gunicorn_socket:
+    driver: local
 
 services:
   postgres:
@@ -25,7 +26,7 @@ services:
       - .:/app:z
       - ./static:/app/static
       - ./logs:/app/logs
-      - gunicorn_socket:/app
+      - gunicorn_socket:/gunicorn_socket
     env_file:
       - .env
     build:
