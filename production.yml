@@ -14,7 +14,6 @@ services:
     volumes:
       - csoc_postgres_data:/var/lib/postgresql/data
       - ./postgresql.conf:/var/lib/postgresql/data/postgresql.conf
-      - ./pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
     env_file:
       - .env
 

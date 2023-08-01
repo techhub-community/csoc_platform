@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'task',
     'rest_framework',
     'rest_framework_simplejwt',
+    'ratelimit',
 ]
 
 MIDDLEWARE = [

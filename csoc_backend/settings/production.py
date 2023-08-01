@@ -59,6 +59,7 @@ DATABASES = {
 }
 
 MIDDLEWARE.append('csoc_backend.logging.middleware.RequestIPMiddleware')
+MIDDLEWARE.append('csoc_backend.rate_limiter.RateLimitMiddleware')
 
 SIMPLE_JWT["SIGNING_KEY"] = SECRET_KEY
 

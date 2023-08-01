@@ -10,3 +10,4 @@ python-dotenv==1.0.0
 loguru
 djangorestframework
 djangorestframework-simplejwt
+django-ratelimit
