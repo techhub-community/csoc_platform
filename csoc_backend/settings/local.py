@@ -15,7 +15,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", default="c_r-e8v1divj8y+hu@-w=n#$xj#ciuejyb
 DEBUG = True
 DOMAIN = "localhost:8000"
 
-ALLOWED_HOSTS = ['*','localhost:8000','','64.227.148.114','django']
+ALLOWED_HOSTS = ['localhost']
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000'

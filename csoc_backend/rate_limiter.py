@@ -6,7 +6,7 @@ class RateLimitMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        response = ratelimit(key='ip', rate='100/s', block=True)(self.get_response)(request)
+        response = ratelimit(key='ip', rate='5/s', block=True)(self.get_response)(request)
         if getattr(request, 'limited', False):
             return HttpResponseForbidden('Too Many Requests')
 

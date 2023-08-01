@@ -1,5 +1,9 @@
 version: '3.8'
 
+networks:
+  my_network:
+    driver: bridge
+
 volumes:
   csoc_postgres_data: {}
   static:
@@ -9,11 +13,10 @@ services:
   postgres:
     image: postgres
     container_name: csoc_postgres
-    ports:
-      - 5432:5432
+    networks:
+      - my_network
     volumes:
       - csoc_postgres_data:/var/lib/postgresql/data
-      - ./postgresql.conf:/var/lib/postgresql/data/postgresql.conf
     env_file:
       - .env
 
@@ -29,6 +32,8 @@ services:
       - gunicorn_socket:/app
     env_file:
       - .env
+    networks:
+      - my_network
     build:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
