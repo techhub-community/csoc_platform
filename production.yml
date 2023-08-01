@@ -8,6 +8,7 @@ volumes:
   csoc_postgres_data: {}
   static:
   gunicorn_socket:
+  nginx_modsec_conf:
 
 services:
   postgres:
