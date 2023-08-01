@@ -7,7 +7,7 @@ from django.views.generic import TemplateView
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='landing/index.html'), name='index'),
     path('submit-contact/', views.submit_contact, name='submit_contact'),
     path('user/', include('user.urls'))

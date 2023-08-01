@@ -10,10 +10,10 @@ services:
     image: postgres
     container_name: csoc_postgres
     ports:
-      - localhost:5432:5432
+      - 127.0.0.1:5432:5432
     volumes:
       - csoc_postgres_data:/var/lib/postgresql/data
-      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./postgresql.conf:/var/lib/postgresql/data/postgresql.conf
     env_file:
       - .env
 
