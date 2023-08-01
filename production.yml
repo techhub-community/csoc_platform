@@ -48,6 +48,7 @@ services:
       - /etc/letsencrypt/live/csoc.codeshack.codes/fullchain.pem:/etc/nginx/certs/fullchain.pem:ro
       - /etc/letsencrypt/live/csoc.codeshack.codes/privkey.pem:/etc/nginx/certs/privkey.pem:ro
       - gunicorn_socket:/app
+      - nginx_modsec_conf:/etc/nginx/modsecurity
     ports:
       - "80:80"
       - "443:443"
