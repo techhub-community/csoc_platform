@@ -44,13 +44,11 @@ services:
 
   nginx:
     build: ./compose/production/nginx
-    restart: always
     volumes:
       - ./static:/app/static
       - /etc/letsencrypt/live/csoc.codeshack.codes/fullchain.pem:/etc/nginx/certs/fullchain.pem:ro
       - /etc/letsencrypt/live/csoc.codeshack.codes/privkey.pem:/etc/nginx/certs/privkey.pem:ro
       - gunicorn_socket:/app
-      # - ./modsecurity/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf:/etc/modsecurity.d/owasp-crs/rules/RESPONSE-999-EXCLUSION-RULES-AFTER-CRS.conf
     ports:
       - "80:80"
       - "443:443"
