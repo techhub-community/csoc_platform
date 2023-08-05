@@ -1,4 +1,4 @@
-FROM owasp/modsecurity-crs:3.3-nginx
+FROM nginx:1.25.0-alpine
 
 RUN rm /etc/nginx/conf.d/default.conf
 

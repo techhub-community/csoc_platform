@@ -58,6 +58,11 @@ DATABASES = {
     }
 }
 
+SECURE_HSTS_SECONDS = 30  # Unit is seconds; *USE A SMALL VALUE FOR TESTING!*
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+
 MIDDLEWARE.append('csoc_backend.logging.middleware.RequestIPMiddleware')
 MIDDLEWARE.append('csoc_backend.rate_limiter.RateLimitMiddleware')
 

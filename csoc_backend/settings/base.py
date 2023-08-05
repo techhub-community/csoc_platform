@@ -9,6 +9,10 @@ AUTH_USER_MODEL = 'user.User'
 
 LOGIN_URL = 'user:login'
 
+# Allow browsers to load 
+# example "cdn.jsdelivr.net" for loading css can be added
+# CSP_IMG_SRC and CSP_SCRIPT_SRC (https://django-csp.readthedocs.io/en/latest/configuration.html)
+CSP_STYLE_SRC = ["'self'"]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -33,6 +37,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware'
 ]
 
 ROOT_URLCONF = 'csoc_backend.urls'
