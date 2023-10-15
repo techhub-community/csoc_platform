@@ -3,7 +3,7 @@ Django==4.2.2
 django-phonenumber-field==7.1.0
 gunicorn==20.1.0
 tzdata==2022.1
-psycopg2-binary==2.9.3
+psycopg2-binary
 sqlparse==0.4.4
 phonenumbers==8.13.14
 python-dotenv==1.0.0
@@ -11,4 +11,5 @@ loguru
 djangorestframework
 djangorestframework-simplejwt
 django-ratelimit
+ratelimit
 django-csp

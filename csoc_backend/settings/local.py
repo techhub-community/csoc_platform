@@ -15,10 +15,11 @@ SECRET_KEY = os.getenv("SECRET_KEY", default="c_r-e8v1divj8y+hu@-w=n#$xj#ciuejyb
 DEBUG = True
 DOMAIN = "localhost:8000"
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:8000'
+    'http://localhost:8000',
+    'http://127.0.0.1:8000'
 ]
 
 DOMAIN = 'localhost:8000'

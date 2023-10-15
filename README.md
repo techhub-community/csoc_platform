@@ -49,3 +49,19 @@
 ```bash
     ./run_commands.sh runserver
 ```
+
+6. Add .env file to the root directory
+
+It's content should be 
+```
+SECRET_KEY=YOUR_SECRET_KEY
+DEBUG=True
+
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=465
+EMAIL_HOST_USER=YOUR_EMAIL_ID
+EMAIL_HOST_PASSWORD=YOUR_APP_PASSWORD_FOR_EMAIL
+DEFAULT_FROM_EMAIL=YOUR_EMAIL_ID
+EMAIL_USE_SSL=True
+```
