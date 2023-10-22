@@ -4,10 +4,10 @@
 <img width="200" alt="Screenshot 2023-08-28 at 9.49.07 PM.png" src="assets/Techhub.jpeg">
 
  
-#CodeShack Summer of Code
+# CodeShack Summer of Code
 <hr/>
 
-#Description
+## Description
 
 <p>The CodeShack Summer of Code, orchestrated by the esteemed CodeShack community at Sir M. Visvesvaraya Institute of Technology in Bengaluru, is a dynamic program comprising two integral phases: a mentorship program and a hackathon. The mentorship phase pairs participants with seasoned mentors in diverse tech domains, spanning Web Development, App Development, DSA, and UI/UX Design. This phase is a transformative experience, fueling personal growth and fostering innovation.
 
@@ -15,13 +15,13 @@ Following the mentorship phase, the hackathon stage takes center stage, where co
 
 <hr/>
 
-##Website
+## Website
 
 <img width="960" alt="Screenshot 2023-08-28 at 9.49.07 PM.png" src="assets/csocwebsite.png">
 
 <hr/>
 
-##Techstacks
+## Techstacks
 <div align="center">
   <img src="assets/html.png" width="100" height="100" style="border-radius: 50%;">
   <img src="assets/css.png" width="100" height="100" style="border-radius: 50%;">
