@@ -1,67 +1,44 @@
-## Installation
 
-1. Clone this repository to your local machine:
+<img width="100" alt="Screenshot 2023-08-28 at 9.49.07 PM.png" src="assets/glug_wh.png">
+<img width="200" alt="Screenshot 2023-08-28 at 9.49.07 PM.png" src="assets/c1.png">
+<img width="200" alt="Screenshot 2023-08-28 at 9.49.07 PM.png" src="assets/Techhub.jpeg">
 
-```bash
-    git clone https://github.com/techhub-community/csoc_platform.git
-    cd csoc_platform
-```
+ 
+#CodeShack Summer of Code
+<hr/>
 
-2. Create a virtual enviornment:
+#Description
 
-```bash
-    python3 -m venv env_name
-```
+<p>The CodeShack Summer of Code, orchestrated by the esteemed CodeShack community at Sir M. Visvesvaraya Institute of Technology in Bengaluru, is a dynamic program comprising two integral phases: a mentorship program and a hackathon. The mentorship phase pairs participants with seasoned mentors in diverse tech domains, spanning Web Development, App Development, DSA, and UI/UX Design. This phase is a transformative experience, fueling personal growth and fostering innovation.
 
-- On Mac/Linux
+Following the mentorship phase, the hackathon stage takes center stage, where collaborative teams converge to create groundbreaking projects. The CodeShack Summer of Code is a catalyst for personal growth, an incubator for innovation, and a powerful force in empowering aspiring developers. It's a transformative journey that leaves an enduring impact on all who partake, nurturing the tech leaders of tomorrow.</p>
 
-```bash
-    source env_name/bin/activate
-```
+<hr/>
 
-- On Windows
+##Website
 
-```bash
-    env_name\Scripts\activate
-```
+<img width="960" alt="Screenshot 2023-08-28 at 9.49.07 PM.png" src="assets/csocwebsite.png">
 
-3. Install requirements
+<hr/>
 
-```bash
-    pip install -r requirements.txt
-```
+##Techstacks
+<div align="center">
+  <img src="assets/html.png" width="100" height="100" style="border-radius: 50%;">
+  <img src="assets/css.png" width="100" height="100" style="border-radius: 50%;">
+  <img src="assets/js.png" width="100" height="100" style="border-radius: 50%;">
+  <img src="assets/django.png" width="100" height="100" style="border-radius: 50%;">
+  <img src="assets/postgres.png" width="100" height="100" style="border-radius: 50%;">
+  <img src="assets/ngnix.png" width="100" height="100" style="border-radius: 50%;">
+</div>
 
-4. Shell Script Permissions and Execution
 
-```bash
-    chmod +xwr run_local.sh
-    chmod +xwr run_migrations.sh
-    chmod +xwr run_commands.sh
-```
+<hr>
 
-```bash
-    ./run_local.sh
-    ./run_migrations.sh
-```
+## Contribute
 
-5. Run Project
+We welcome contributions in our community.<br>
+Before making a contribution, check the <a href="CONTRIBUTING.md">Contribution guide.</a>
+<hr>
 
-```bash
-    ./run_commands.sh runserver
-```
+## Thanks to all the contributors ❤️
 
-6. Add .env file to the root directory
-
-It's content should be 
-```
-SECRET_KEY=YOUR_SECRET_KEY
-DEBUG=True
-
-EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST='smtp.gmail.com'
-EMAIL_PORT=465
-EMAIL_HOST_USER=YOUR_EMAIL_ID
-EMAIL_HOST_PASSWORD=YOUR_APP_PASSWORD_FOR_EMAIL
-DEFAULT_FROM_EMAIL=YOUR_EMAIL_ID
-EMAIL_USE_SSL=True
-```
