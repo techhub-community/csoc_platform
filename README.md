@@ -1,8 +1,8 @@
-
+<div align="center">
 <img width="100" alt="glug" src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/glug_wh.png">
 <img width="200" alt="Codeshack" src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/c1.png">
 <img width="200" alt="TechHub" src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/Techhub.jpeg">
-
+</div>
  
 # CodeShack Summer of Code
 <hr/>
