@@ -17,7 +17,7 @@ Following the mentorship phase, the hackathon stage takes center stage, where co
 
 ## Website
 
-<img width="960" alt="https://github.com/techhub-community/csoc_platform/blob/Readme/images/csocwebsite.png">
+<img width="960" src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/csocwebsite.png" alt="csoc website">
 
 <hr/>
 
