@@ -3,7 +3,7 @@
 <img width="200" alt="Codeshack" src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/c1.png">
 <img width="200" alt="TechHub" src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/Techhub.jpeg">
 </div>
-<div align="center">
+<div align="center" width="400" height="300">
 <h1>CodeShack Summer of Code</h1> 
 </div>
 <hr/>
