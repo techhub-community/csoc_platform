@@ -29,7 +29,9 @@ Following the mentorship phase, the hackathon stage takes center stage, where co
   <img src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/js.png" width="100" height="100" style="border-radius: 50%;">
   <img src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/django.png" width="100" height="100" style="border-radius: 50%;">
   <img src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/postgres.png" width="100" height="100" style="border-radius: 50%;">
-  <img src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/ngnix.png" width="100" height="100" style="border-radius: 50%;">
+
+<img src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/ngnix.png" width="100" height="100" style="border-radius: 50%;">
+
 </div>
 
 
