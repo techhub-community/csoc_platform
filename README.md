@@ -1,6 +1,6 @@
 
-<img width="100" alt="glug" src="assets/glug_wh.png">
-<img width="200" alt="Codeshack" src="assets/c1.png">
+<img width="100" alt="glug" src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/glug_wh.png">
+<img width="200" alt="Codeshack" src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/c1.png">
 <img width="200" alt="TechHub" src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/Techhub.jpeg">
 
  
@@ -17,18 +17,18 @@ Following the mentorship phase, the hackathon stage takes center stage, where co
 
 ## Website
 
-<img width="960" alt="Screenshot 2023-08-28 at 9.49.07 PM.png" src="assets/csocwebsite.png">
+<img width="960" alt="https://github.com/techhub-community/csoc_platform/blob/Readme/images/csocwebsite.png">
 
 <hr/>
 
 ## Techstacks
 <div align="center">
-  <img src="assets/html.png" width="100" height="100" style="border-radius: 50%;">
-  <img src="assets/css.png" width="100" height="100" style="border-radius: 50%;">
-  <img src="assets/js.png" width="100" height="100" style="border-radius: 50%;">
-  <img src="assets/django.png" width="100" height="100" style="border-radius: 50%;">
-  <img src="assets/postgres.png" width="100" height="100" style="border-radius: 50%;">
-  <img src="assets/ngnix.png" width="100" height="100" style="border-radius: 50%;">
+  <img src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/html.png" width="100" height="100" style="border-radius: 50%;">
+  <img src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/css.png" width="100" height="100" style="border-radius: 50%;">
+  <img src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/js.png" width="100" height="100" style="border-radius: 50%;">
+  <img src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/django.png" width="100" height="100" style="border-radius: 50%;">
+  <img src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/postgres.png" width="100" height="100" style="border-radius: 50%;">
+  <img src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/ngnix.png" width="100" height="100" style="border-radius: 50%;">
 </div>
 
 
