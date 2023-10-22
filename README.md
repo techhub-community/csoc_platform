@@ -1,7 +1,7 @@
 
-<img width="100" alt="Screenshot 2023-08-28 at 9.49.07 PM.png" src="assets/glug_wh.png">
-<img width="200" alt="Screenshot 2023-08-28 at 9.49.07 PM.png" src="assets/c1.png">
-<img width="200" alt="Screenshot 2023-08-28 at 9.49.07 PM.png" src="assets/Techhub.jpeg">
+<img width="100" alt="glug" src="assets/glug_wh.png">
+<img width="200" alt="Codeshack" src="assets/c1.png">
+<img width="200" alt="TechHub" src="[assets/Techhub.jpeg](https://github.com/techhub-community/csoc_platform/blob/Readme/images/Techhub.jpeg)">
 
  
 # CodeShack Summer of Code
