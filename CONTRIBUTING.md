@@ -33,7 +33,7 @@
 - On Windows
 
 ```bash
-    env_name\bin\activate
+    env_name\Scripts\activate
 ```
 
 3. Install requirements
