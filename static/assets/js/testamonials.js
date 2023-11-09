@@ -1,11 +1,8 @@
-
-
 var swiper = new Swiper(".slide-content", {
     watchSlidesProgress: true,
-    slidesPerView: 3,
     spaceBetween: 25,
     loop: true,
-    centeredSlides: 'true',
+    centeredSlides: false,
     loopFillGroupWithBlank: true,
     fade: true,
     grabCursor: true,
@@ -19,13 +16,13 @@ var swiper = new Swiper(".slide-content", {
       prevEl: ".swiper-button-prev",
     },
     breakpoints: {
-        520:{
+        520: {
             slidesPerView: 1,
         },
-        700:{
+        700: {
             slidesPerView: 2,
         },
-        950:{
+        950: {
             slidesPerView: 3,
         }
     },
@@ -33,4 +30,4 @@ var swiper = new Swiper(".slide-content", {
         delay: 2500,
         disableOnInteraction: false,
     },
-  });
+});
