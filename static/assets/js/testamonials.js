@@ -19,12 +19,12 @@ var swiper = new Swiper(".slide-content", {
         520: {
             slidesPerView: 1,
         },
-        700: {
+        1000: {
             slidesPerView: 2,
         },
-        950: {
+        1200: {
             slidesPerView: 3,
-        }
+        },
     },
     autoplay: {
         delay: 2500,

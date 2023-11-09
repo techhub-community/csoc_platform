@@ -22,10 +22,11 @@
     overflow: hidden;
 }
 .card{
+    border-color: #fef8f5;
     /* width: 320px; */
     /* Change height here  */
     border-radius: 25px;
-    background-color: #fff;
+    background-color: #fef8f5;
 }
 .image-content,
 .card-content{
@@ -71,7 +72,7 @@
 }
 .overlay::after{
     border-radius: 0 25px 0 0;
-    background-color: #fff;
+    background-color: #fef8f5;
 }
 .card-image .card-img{
     height: 100%;
