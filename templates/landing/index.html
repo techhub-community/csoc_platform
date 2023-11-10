@@ -30,6 +30,10 @@
  <!--% static 'assets/css/timeline.css' %-->
   <link rel="stylesheet" href="{% static 'assets/css/timeline.css' %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+
+  <!--% static 'assets/css/testamonials.css' %-->
+  <link rel="stylesheet" href="{% static 'assets/css/testamonials.css' %}">
+
   <!-- =======================================================
   * Template Name: Ninestars
   * Updated: May 30 2023 with Bootstrap v5.3.0
@@ -362,262 +366,125 @@
     <!-- ======= Clients Section ======= -->
 
     <section id="clients" class="clients section-bg">
-      <div class="container" data-aos="fade-up">
+      <div class="container" data-aos="fade-up" id="slidecontainer">
 
         <div class="section-title">
           <h1><b>TESTIMONIALS</b></h1>
           <p>Empowering Experiences With An Unforgettable Impact!</p>
         </div>
+        
+      
+        <div class="slide-container swiper" id="swiper">
+          <div class="slide-content">
+            <div class="card-wrapper swiper-wrapper">
+              <div class="card swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+      
+                  <div class="card-image">
+                    <img src="{% static 'assets/img/testamonials/rishav.jpg' %}" alt="" class="card-img">
+                  </div>
+                </div>
 
-<!-- Carousel wrapper -->
-<div id="carouselMultiItemExample" class="carousel slide carousel-dark text-center" data-mdb-ride="carousel">
-  <!-- Controls -->
-  <div class="d-flex justify-content-center mb-4">
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselMultiItemExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselMultiItemExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-  
-  <script>
-    window.addEventListener('load',()=>{
-      console.log("this is gif fpunciton ");
-      let loading_container=document.getElementById('loading-container');
-      console.log("loader container",loading_container);
-      loading_container.style.display='none';
-      console.log("end of gif");
-    })
-  const carousel = document.getElementById('carouselMultiItemExample');
-  
-  carousel.addEventListener('slide', function(event) {
-    // Do something when the slide changes
-    console.log(event.detail.slide);
-  });
-  </script>
-  <!-- Inner -->
-  <div class="carousel-inner py-4">
-    <!-- Single item -->
-    <div class="carousel-item active">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
-            <img class="rounded-circle shadow-1-strong mb-4"
-              src="{% static 'assets\img\clients\roshini.jpg' %}" alt="avatar"
-              style="width: 150px;" />
-            <h5 class="mb-3">Roshni Das</h5>
-            <p>Web Development</p>
-            <p class="text-muted">
-              <i class="fas fa-quote-left pe-2"></i>
-              <svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m21.301 4c.411 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.738 4.129-4.308 4.129-3.24 0-4.83-2.547-4.83-5.307 0-5.98 6.834-10.693 8.468-10.693zm-10.833 0c.41 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.739 4.129-4.308 4.129-3.241 0-4.83-2.547-4.83-5.307 0-5.98 6.833-10.693 8.468-10.693z" fill-rule="nonzero"/></svg>
-              I participated in CSOC in 1st year. It helped me to get acquainted with Github and basics of web development. The mentors were very helpful and were enthusiastic towards our doubts which made this program more fun
-             <svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m2.699 20c-.411 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.016.092-4.326-2.582-4.326-4.258 0-2.006 1.738-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.834 10.693-8.468 10.693zm10.833 0c-.41 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.015.092-4.326-2.582-4.326-4.258 0-2.006 1.739-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.833 10.693-8.468 10.693z" fill-rule="nonzero"/></svg>
-            </p>
-            <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-            </ul>
+                <div class="card-content">
+                  <div class="domain">
+                    <p>Web Dev</p>
+                  </div>
+                  <h2 class="name">Rishav Kumar</h2>
+                  <p class="description">The CSOC mentorship program was a game-changer for me, elevating not only my problem-solving approach but also refining my skills in team management. It was an invaluable experience!</p>
+
+                </div>
+
+              </div>
+              <!-- 2 -->
+              <div class="card swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+      
+                  <div class="card-image">
+                    <img src="{% static 'assets/img/testamonials/pooja.jpg' %}" alt="" class="card-img">
+                  </div>
+                </div>
+
+                <div class="card-content">
+                  <div class="domain">
+                    <p>Web Dev</p>
+                  </div>
+                  <h2 class="name">Pooja</h2>
+                  <p class="description">
+                    Both of my mentors were very good. But Anushka Dii has helped me a lot. She always solved my doubts and guided me by providing clear explanation. They were usually available, when I needed help, which was great for my learning.
+                  </p>
+
+                </div>
+
+              </div>
+              <!-- 3 -->
+              <div class="card swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+      
+                  <div class="card-image">
+                    <img src="{% static 'assets/img/testamonials/manish.jpg' %}" alt="" class="card-img">
+                  </div>
+                </div>
+
+                <div class="card-content">
+                  <div class="domain">
+                    <p>Web Dev</p>
+                  </div>
+                  <h2 class="name">Manish</h2>
+                  <p class="description" style="font-size: 9px; line-height: 0.1rem; ">
+                    The CSOC event was wonderful and educational. The comprehensive and well-structured program, spanning over a couple of weeks, provided an immersive learning experience, covering an array of vital concepts in web development.The carefully curated sessions, led by our seniors, not only elucidated the fundamental principles but also delved into advanced topics, equipping us with practical insights and hands-on skills.
+                  </p>
+
+                </div>
+
+              </div>
+              <!-- 4 -->
+              <div class="card swiper-slide">
+                <div class="image-content">
+                  <span class="overlay"></span>
+      
+                  <div class="card-image">
+                    <img src="{% static 'assets/img/testamonials/manyata.jpg' %}" alt="" class="card-img">
+                  </div>
+                </div>
+
+                <div class="card-content">
+                  <div class="domain">
+                    <p>Web Dev</p>
+                  </div>
+                  <h2 class="name">Manyata</h2>
+                  <p class="description" style="font-size: 9px; line-height: 0.1rem; ">
+                    Participating in the mentorship program was incredibly enriching. My mentor's vast knowledge and guidance empowered me to overcome challenges, achieve goals, and make significant strides in my professional development. The personalized feedback, coupled with networking opportunities, expanded my skills and confidence. I highly recommend this rewarding journey to anyone seeking personal and career growth through mentorship.
+                  </p>
+
+                </div>
+
+              </div>
+              <!-- 5 -->
+              
+            </div>
           </div>
 
-          <div class="col-lg-4 d-none d-lg-block">
-            <img class="rounded-circle shadow-1-strong mb-4"
-              src="{% static 'assets\img\clients\pallavi1.jpg' %}" alt="avatar"
-              style="width: 150px;" />
-            <h5 class="mb-3">Pallavi Kumari</h5>
-            <p>Web Development</p>
-            <p class="text-muted">
-              <i class="fas fa-quote-left pe-2"></i><svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m21.301 4c.411 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.738 4.129-4.308 4.129-3.24 0-4.83-2.547-4.83-5.307 0-5.98 6.834-10.693 8.468-10.693zm-10.833 0c.41 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.739 4.129-4.308 4.129-3.241 0-4.83-2.547-4.83-5.307 0-5.98 6.833-10.693 8.468-10.693z" fill-rule="nonzero"/></svg>
-              Being part of an exceptional tech team enriched my problem-solving skills, fueled innovation, and empowered my professional growth for impactful contributions in future endeavors.
-              <svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m2.699 20c-.411 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.016.092-4.326-2.582-4.326-4.258 0-2.006 1.738-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.834 10.693-8.468 10.693zm10.833 0c-.41 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.015.092-4.326-2.582-4.326-4.258 0-2.006 1.739-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.833 10.693-8.468 10.693z" fill-rule="nonzero"/></svg>
-            </p>
-            <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li>
-                <i class="fas fa-star-half-alt fa-sm"></i>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-lg-4 d-none d-lg-block">
-            <img class="rounded-circle shadow-1-strong mb-4"
-              src="{% static 'assets\img\clients\ankit.jpg' %}" alt="avatar"
-              style="width: 150px;" />
-            <h5 class="mb-3">Ankit Josh</h5>
-            <p>Web Development</p>
-            <p class="text-muted">
-              <i class="fas fa-quote-left pe-2"></i><svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m21.301 4c.411 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.738 4.129-4.308 4.129-3.24 0-4.83-2.547-4.83-5.307 0-5.98 6.834-10.693 8.468-10.693zm-10.833 0c.41 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.739 4.129-4.308 4.129-3.241 0-4.83-2.547-4.83-5.307 0-5.98 6.833-10.693 8.468-10.693z" fill-rule="nonzero"/></svg>
-              I had the privilege of being part of an exceptional group of tech enthusiasts, where I learned a lot and honed my development skills. It was a thrilling and enriching experience.
-           <svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m2.699 20c-.411 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.016.092-4.326-2.582-4.326-4.258 0-2.006 1.738-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.834 10.693-8.468 10.693zm10.833 0c-.41 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.015.092-4.326-2.582-4.326-4.258 0-2.006 1.739-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.833 10.693-8.468 10.693z" fill-rule="nonzero"/></svg> </p>
-            <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="far fa-star fa-sm"></i></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Single item -->
-    <div class="carousel-item">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
-            <img class="rounded-circle shadow-1-strong mb-4"
-              src="{% static 'assets\img\clients\anushka.jpg' %}" alt="avatar"
-              style="width: 150px;" />
-            <h5 class="mb-3">Anushka Singh</h5>
-            <p>Web Development</p>
-            <p class="text-muted">
-              <i class="fas fa-quote-left pe-2"></i><svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m21.301 4c.411 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.738 4.129-4.308 4.129-3.24 0-4.83-2.547-4.83-5.307 0-5.98 6.834-10.693 8.468-10.693zm-10.833 0c.41 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.739 4.129-4.308 4.129-3.241 0-4.83-2.547-4.83-5.307 0-5.98 6.833-10.693 8.468-10.693z" fill-rule="nonzero"/></svg>
-             During my Mentorship Program I got to learn a lot about my domain of interest Web Development. Being a part of Hackathon I got the practical knowledge of this field which will help me in future endeavors.
-            <svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m2.699 20c-.411 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.016.092-4.326-2.582-4.326-4.258 0-2.006 1.738-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.834 10.693-8.468 10.693zm10.833 0c-.41 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.015.092-4.326-2.582-4.326-4.258 0-2.006 1.739-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.833 10.693-8.468 10.693z" fill-rule="nonzero"/></svg></p>
-            <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-4 d-none d-lg-block">
-            <img class="rounded-circle shadow-1-strong mb-4"
-              src="{% static 'assets\img\clients\NIKUNJ1.jpg' %}" alt="avatar"
-              style="width: 150px;" />
-            <h5 class="mb-3">Nikunj Dwivedi</h5>
-            <p>Web Development</p>
-            <p class="text-muted">
-              <i class="fas fa-quote-left pe-2"></i><svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m21.301 4c.411 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.738 4.129-4.308 4.129-3.24 0-4.83-2.547-4.83-5.307 0-5.98 6.834-10.693 8.468-10.693zm-10.833 0c.41 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.739 4.129-4.308 4.129-3.241 0-4.83-2.547-4.83-5.307 0-5.98 6.833-10.693 8.468-10.693z" fill-rule="nonzero"/></svg> 
-              My journey in the tech team has been transformative, and I am grateful for the opportunities I have had to learn, grow, and collaborate with exceptional professionals.
-            <svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m2.699 20c-.411 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.016.092-4.326-2.582-4.326-4.258 0-2.006 1.738-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.834 10.693-8.468 10.693zm10.833 0c-.41 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.015.092-4.326-2.582-4.326-4.258 0-2.006 1.739-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.833 10.693-8.468 10.693z" fill-rule="nonzero"/></svg></p>
-            <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li>
-                <i class="fas fa-star-half-alt fa-sm"></i>
-              </li>
-            </ul>
-          </div>
-
-          <div class="col-lg-4 d-none d-lg-block">
-            <img class="rounded-circle shadow-1-strong mb-4"
-              src="{% static 'assets\img\clients\apoorva.jpg' %}" alt="avatar"
-              style="width: 150px;" />
-            <h5 class="mb-3">Apoorva Shreya</h5>
-            <p>Web Development</p>
-            <p class="text-muted">
-              <i class="fas fa-quote-left pe-2"></i><svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m21.301 4c.411 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.738 4.129-4.308 4.129-3.24 0-4.83-2.547-4.83-5.307 0-5.98 6.834-10.693 8.468-10.693zm-10.833 0c.41 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.739 4.129-4.308 4.129-3.241 0-4.83-2.547-4.83-5.307 0-5.98 6.833-10.693 8.468-10.693z" fill-rule="nonzero"/></svg>
-              The mentorship program was a whole experience in itself. We got to learn so much through our mentor Harshit bhaiya. He guided us so well through out with regular sessions. All in all it was a great experience for skill development.
-            <svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m2.699 20c-.411 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.016.092-4.326-2.582-4.326-4.258 0-2.006 1.738-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.834 10.693-8.468 10.693zm10.833 0c-.41 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.015.092-4.326-2.582-4.326-4.258 0-2.006 1.739-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.833 10.693-8.468 10.693z" fill-rule="nonzero"/></svg></p>
-            <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li>
-                <i class="fas fa-star-half-alt fa-sm"></i>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- Single item -->
-    <div class="carousel-item">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
-            <img class="rounded-circle shadow-1-strong mb-4"
-              src="{% static 'assets\img\clients\utkarsh6.jpg' %}" alt="avatar"
-              style="width: 150px;" />
-            <h5 class="mb-3">Utkarsh Kumar</h5>
-            <p>App Development</p>
-            <p class="text-muted">
-              <i class="fas fa-quote-left pe-2"></i><svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m21.301 4c.411 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.738 4.129-4.308 4.129-3.24 0-4.83-2.547-4.83-5.307 0-5.98 6.834-10.693 8.468-10.693zm-10.833 0c.41 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.739 4.129-4.308 4.129-3.241 0-4.83-2.547-4.83-5.307 0-5.98 6.833-10.693 8.468-10.693z" fill-rule="nonzero"/></svg>
-              During my CSOC mentorship program, I learned Flutter and developed a product for CSOC Hackathon. It was a great learning experience. We built a project that addressed a specific challenge and showcased it at the hackathon. The program helped me enhance my skills and gain practical experience.
-            <svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m2.699 20c-.411 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.016.092-4.326-2.582-4.326-4.258 0-2.006 1.738-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.834 10.693-8.468 10.693zm10.833 0c-.41 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.015.092-4.326-2.582-4.326-4.258 0-2.006 1.739-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.833 10.693-8.468 10.693z" fill-rule="nonzero"/></svg></p>
-            <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-            </ul>
-          </div>
-
-          <div class="col-lg-4 d-none d-lg-block">
-            <img class="rounded-circle shadow-1-strong mb-4"
-              src="{% static 'assets\img\clients\om1.jpg' %}" alt="avatar"
-              style="width: 150px;" />
-            <h5 class="mb-3">Om Singh</h5>
-            <p>Web Development</p>
-            <p class="text-muted">
-              <i class="fas fa-quote-left pe-2"></i>
-              <svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m21.301 4c.411 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.738 4.129-4.308 4.129-3.24 0-4.83-2.547-4.83-5.307 0-5.98 6.834-10.693 8.468-10.693zm-10.833 0c.41 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.739 4.129-4.308 4.129-3.241 0-4.83-2.547-4.83-5.307 0-5.98 6.833-10.693 8.468-10.693z" fill-rule="nonzero"/></svg>
-              Joining the mentorship program and participating in the club's hackathon made me really happy and excited. Working with fellow tech-loving students, we had limited time to solve a challenge, but the mentors and my teammates were always there to help, and the community was friendly and encouraging
-              <svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m2.699 20c-.411 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.016.092-4.326-2.582-4.326-4.258 0-2.006 1.738-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.834 10.693-8.468 10.693zm10.833 0c-.41 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.015.092-4.326-2.582-4.326-4.258 0-2.006 1.739-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.833 10.693-8.468 10.693z" fill-rule="nonzero"/></svg>
-            </p>
-            <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="far fa-star fa-sm"></i></li>
-            </ul>
-          </div>
-
-
-          <div class="col-lg-4 d-none d-lg-block">
-            <img class="rounded-circle shadow-1-strong mb-4"
-              src="{% static 'assets\img\clients\arvind.jpg' %}" alt="avatar"
-              style="width: 150px;" />
-            <h5 class="mb-3">Arvind Panda</h5>
-            <p>Web Development</p>
-            <p class="text-muted">
-              <i class="fas fa-quote-left pe-2"></i><svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m21.301 4c.411 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.738 4.129-4.308 4.129-3.24 0-4.83-2.547-4.83-5.307 0-5.98 6.834-10.693 8.468-10.693zm-10.833 0c.41 0 .699.313.699.663 0 .248-.145.515-.497.702-1.788.948-3.858 4.226-3.858 6.248 3.016-.092 4.326 2.582 4.326 4.258 0 2.007-1.739 4.129-4.308 4.129-3.241 0-4.83-2.547-4.83-5.307 0-5.98 6.833-10.693 8.468-10.693z" fill-rule="nonzero"/></svg>  
-              It was a wonderful experience gaining hands-on knowledge. It made me feel like a "coder" for the first time. I explored the basics of web dev and came to realize that tech is an ever-evolving field; there is always a next step. The mentors allowed me to progress at my own pace and were always ready to address any doubts I had!
-            <svg height="15" width="15" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 2 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m2.699 20c-.411 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.016.092-4.326-2.582-4.326-4.258 0-2.006 1.738-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.834 10.693-8.468 10.693zm10.833 0c-.41 0-.699-.312-.699-.662 0-.249.145-.516.497-.703 1.788-.947 3.858-4.226 3.858-6.248-3.015.092-4.326-2.582-4.326-4.258 0-2.006 1.739-4.129 4.308-4.129 3.241 0 4.83 2.547 4.83 5.307 0 5.981-6.833 10.693-8.468 10.693z" fill-rule="nonzero"/></svg></p>
-            <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="fas fa-star fa-sm"></i></li>
-              <li><i class="far fa-star fa-sm"></i></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Inner -->
-
-
-
+            <!-- <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div> -->
             
+            <img src="{% static 'assets/img/right-arrow.svg' %}" class="swiper-button-next" id="tBtnNxt"></img>
+            <img src="{% static 'assets/img/left-arrow.svg' %}" class="swiper-button-prev" id="tBtnPrv"></img>
+            <div class="swiper-pagination"></div>
+          </div>
+      </div>
+      
 
-</div>
+      
+
+
 
 
 <!-- Carousel wrapper -->
-       
-        <!--
-        <div class="clients-slider swiper" data-aos="fade-up" data-aos-delay="100">
+
+        <!-- <div class="clients-slider swiper" data-aos="fade-up" data-aos-delay="100">
           <div class="swiper-wrapper align-items-center">
             <div class="swiper-slide"><img src="{% static 'assets/img/clients/utkarsh6.jpg' %}"  class="img-fluid" alt="">
             <h6><br>"During my CSOC mentorship program, I learned Flutter and developed a product for CSOC Hackathon. It was a great learning experience. We built a project that addressed a specific challenge and showcased it at the hackathon. The program helped me enhance my skills and gain practical experience."</h6>
@@ -633,9 +500,9 @@
           <div class="swiper-pagination"></div>
 
         </div>
-      -->
+      
 
-      </div>
+      </div> -->
     </section>
 
     <!-- End Clients Section -->
@@ -1542,6 +1409,8 @@
   <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
   <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
 
+  <!-- Testamonials JS File  -->
+  <script src="{%static 'assets/js/testamonials.js' %}"></script>
   <!-- Template Main JS File -->
   <script src="{%static 'assets/js/main.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
