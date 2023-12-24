@@ -12,3 +12,7 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
         fields = ["task_name", "team", "detail", "task_status"]
+
+
+class ProgressSerializer(serializers.Serializer):
+    progress = serializers.FloatField()
