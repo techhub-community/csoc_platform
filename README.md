@@ -4,7 +4,7 @@
 <img width="200" alt="TechHub" src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/Techhub.jpeg">
 </div>
 <div align="center" width="400" height="300">
-<h1>CodeShack Summer of Code</h1> [![Django CI](https://github.com/techhub-community/csoc_platform/actions/workflows/ci.yml/badge.svg)](https://github.com/techhub-community/csoc_platform/actions/workflows/ci.yml)
+<h1>CodeShack Summer of Code [![Django CI](https://github.com/techhub-community/csoc_platform/actions/workflows/ci.yml/badge.svg)](https://github.com/techhub-community/csoc_platform/actions/workflows/ci.yml) </h1> 
 </div>
 <hr/>
 
