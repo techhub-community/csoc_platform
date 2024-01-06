@@ -4,11 +4,11 @@
 <img width="200" alt="TechHub" src="https://github.com/techhub-community/csoc_platform/blob/Readme/images/Techhub.jpeg">
 </div>
 <div align="center" width="400" height="300">
-<h1>CodeShack Summer of Code</h1> 
+<h1>CodeShack Summer of Code  </h1> 
 </div>
 <hr/>
 
-## Description
+## Description    [![Django CI](https://github.com/techhub-community/csoc_platform/actions/workflows/ci.yml/badge.svg)](https://github.com/techhub-community/csoc_platform/actions/workflows/ci.yml)
 
 <p>The CodeShack Summer of Code, orchestrated by the esteemed CodeShack community at Sir M. Visvesvaraya Institute of Technology in Bengaluru, is a dynamic program comprising two integral phases: a mentorship program and a hackathon. The mentorship phase pairs participants with seasoned mentors in diverse tech domains, spanning Web Development, App Development, DSA, and UI/UX Design. This phase is a transformative experience, fueling personal growth and fostering innovation.
 
